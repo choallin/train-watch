@@ -1,10 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-//#include <QQuickStyle>
+#include <QQuickStyle>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    qputenv("QT_QUICK_CONTROLS_STYLE", "material");
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
