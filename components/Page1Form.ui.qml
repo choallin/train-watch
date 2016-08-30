@@ -20,4 +20,8 @@ Item {
             text: qsTr("Press Me 2")
         }
     }
+
+    Clock {
+        id: clock
+    }
 }
