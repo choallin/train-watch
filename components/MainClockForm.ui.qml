@@ -8,6 +8,7 @@ Item {
 
     width: 400
     height: 400
+    rotation: 0
 
     property alias trains: nextTrain.model
     property alias date: date.text
@@ -56,9 +57,10 @@ Item {
 
         Image {
             id: clockArrowMinute
-            x: 8
+            x: 0
             y: 8
-            width: 134
+            // anchors.baseline: parent
+            width: 150
             height: 70
             rotation: 0
             transformOrigin: Item.Bottom
@@ -68,7 +70,7 @@ Item {
         }
         Image {
             id: clockImageHour
-            x: 38
+            x: 37
             y: 33
             width: 75
             height: 45
@@ -76,6 +78,15 @@ Item {
             fillMode: Image.TileVertically
             transformOrigin: Item.Bottom
             source: "../images/line2.png"
+        }
+
+        Image {
+            id: image1
+            anchors.centerIn: parent
+            width: 15
+            height: 15
+            fillMode: Image.Stretch
+            source: "../images/point.png"
         }
     }
 

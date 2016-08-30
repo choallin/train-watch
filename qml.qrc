@@ -13,5 +13,6 @@
         <file>train_watch.pro</file>
         <file>images/line2.png</file>
         <file>images/clock.gif</file>
+        <file>images/point.png</file>
     </qresource>
 </RCC>
