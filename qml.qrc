@@ -14,5 +14,7 @@
         <file>images/line2.png</file>
         <file>images/clock.gif</file>
         <file>images/point.png</file>
+        <file>components/AlarmClock.qml</file>
+        <file>components/AlarmClockForm.ui.qml</file>
     </qresource>
 </RCC>
