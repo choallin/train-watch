@@ -19,4 +19,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 DISTFILES += \
-    components/Clock.qml
+    components/AlarmClock.qml \
+    components/AlarmClockForm.ui.qml

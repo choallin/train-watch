@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.7
 
 Item {
     anchors.fill: parent
@@ -28,6 +28,8 @@ Item {
         mainClock.date = date.getDate().toString() + "." + date.getMonth().toString() + "." + date.getFullYear().toString()
         mainClock.minuteRotation = 6 * date.getMinutes()
         mainClock.hourRotation = 30 * date.getHours()
+
+        // API call to get the next train and set mainClock.train
     }
 }
 

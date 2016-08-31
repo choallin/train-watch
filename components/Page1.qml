@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
-//import
 
 Pane {
     id: overview
@@ -18,9 +17,9 @@ Pane {
         Repeater {
             model: 2
 
-//            AlarmClock {
-//                Layout.column: 1
-//            }
+            AlarmClock {
+                Layout.column: 3
+            }
         }
     }
 }
