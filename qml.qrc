@@ -5,15 +5,6 @@
         <file>components/Page1Form.ui.qml</file>
         <file>components/MainClock.qml</file>
         <file>components/MainClockForm.ui.qml</file>
-        <file>deployment.pri</file>
-        <file>LICENSE</file>
-        <file>main.cpp</file>
-        <file>qml.qrc</file>
-        <file>README.md</file>
-        <file>train_watch.pro</file>
-        <file>images/line2.png</file>
-        <file>images/clock.gif</file>
-        <file>images/point.png</file>
         <file>components/AlarmClock.qml</file>
         <file>components/AlarmClockForm.ui.qml</file>
     </qresource>
