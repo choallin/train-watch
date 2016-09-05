@@ -7,9 +7,10 @@ import "./components"
 
 ApplicationWindow {
     visible: true
-    //title: qsTr("Train Watch")
+    title: qsTr("Train Watch")
 
     Material.theme: Material.Light
+    Material.primary: Material.LightBlue
     Material.accent: Material.Purple
 
     id: root
@@ -31,7 +32,6 @@ ApplicationWindow {
     }
 
     header: TabBar {
-        Material.foreground: white
         id: tabBar
         currentIndex: swipeView.currentIndex
         TabButton {
