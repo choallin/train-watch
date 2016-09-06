@@ -7,11 +7,12 @@ import "components" as TwComponents
 
 ApplicationWindow {
     visible: true
-    //title: qsTr("Train Watch")
+    title: qsTr("Train Watch")
 
     id: root
 
     Material.theme: Material.Light
+    Material.primary: Material.LightBlue
     Material.accent: Material.Purple
     Material.primary: Material.Purple
 

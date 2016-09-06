@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.7
 import QtQuick.Controls 2.0
 
 Item {
@@ -57,11 +57,13 @@ Item {
 
         Image {
             id: clockArrowMinute
-            x: 0
-            y: 8
+            // x: 0
+            // y: 8
+            anchors.horizontalCenter: parent.horizontalCenter
             // anchors.baseline: parent
             width: 150
             height: 70
+            anchors.bottom: parent.Center
             rotation: 0
             transformOrigin: Item.Bottom
             fillMode: Image.TileVertically
