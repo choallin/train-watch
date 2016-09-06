@@ -4,7 +4,8 @@ QT += qml quick quickcontrols2
 
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    fileio.cpp
 
 OTHER_FILES += \
     main.qml \
@@ -22,3 +23,8 @@ include(deployment.pri)
 DISTFILES += \
     components/AlarmClock.qml \
     components/AlarmClockForm.ui.qml
+
+HEADERS += \
+    fileio.h \
+    appdata/appdatadirutility.h \
+    appdata/appdatadir.h
