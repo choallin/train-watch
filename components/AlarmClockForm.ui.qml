@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.0
 Item {
     width: 400
     height: 200
+
     property alias wendnesday: wendnesday
     property alias thursday: thursday
     property alias friday: friday
@@ -12,6 +13,7 @@ Item {
     property alias sunday: sunday
     property alias tuesday: tuesday
     property alias monday: monday
+
     property alias trainLine: trainLine
     property alias direction: direction
     property alias station: station
