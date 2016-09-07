@@ -5,20 +5,34 @@ import QtQuick.Layouts 1.3
 Pane {
     id: overview
 
-    GridLayout {
-        id: grid
-        columns: 3
+    ColumnLayout {
+        id: column
+
+        spacing: 3
         anchors.fill: parent
 
         MainClock {
-            Layout.column: 3
+            id: mainclock
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            anchors.fill: parent
         }
 
-        Repeater {
-            model: 2
+        ListView {
+            id: alarmView
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            clip: true
 
-            AlarmClock {
-                Layout.column: 3
+            model: ListModel {
+                ListElement { type: "AlarmClock"; text: "AlarmClock" }
+                ListElement { type: "AlarmClock"; text: "AlarmClock" }
+            }
+
+            delegate: AlarmClock {
+                id: delegateAlarmClock
+                width: alarmView.width
+
             }
         }
     }

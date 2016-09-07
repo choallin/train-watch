@@ -7,7 +7,7 @@ Item {
 
 
     width: 400
-    height: 400
+    height: 250
     rotation: 0
 
     property alias trains: nextTrain.model

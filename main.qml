@@ -12,7 +12,6 @@ ApplicationWindow {
     id: root
 
     Material.theme: Material.Light
-    Material.primary: Material.LightBlue
     Material.accent: Material.Purple
     Material.primary: Material.Purple
 

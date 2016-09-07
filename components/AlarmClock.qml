@@ -1,4 +1,9 @@
 import QtQuick 2.7
 
-AlarmClockForm {
+Item {
+
+    AlarmClockForm {
+        id: alarmOverview
+    }
 }
+

@@ -3,8 +3,10 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 Item {
-    width: 400
-    height: 200
+    id: item1
+    width: 380
+    height: 250
+    property alias more: more
 
     property alias wendnesday: wendnesday
     property alias thursday: thursday
@@ -21,7 +23,7 @@ Item {
     property alias alarm: alarm
 
     Text {
-        id: text1
+        id: alarmText
         x: 21
         y: 19
         width: 80
@@ -43,7 +45,7 @@ Item {
     }
 
     Text {
-        id: text2
+        id: departureText
         x: 21
         y: 54
         text: qsTr("Abfahrt:")
@@ -59,7 +61,7 @@ Item {
     }
 
     Text {
-        id: text3
+        id: offsetText
         x: 21
         y: 79
         text: qsTr("Offset")
@@ -75,10 +77,11 @@ Item {
     }
 
     Text {
-        id: text4
+        id: stationText
         x: 21
         y: 104
         text: qsTr("Bahnhof")
+        visible: false
         font.pixelSize: 16
     }
 
@@ -87,49 +90,57 @@ Item {
         x: 122
         y: 104
         text: qsTr("Gratwein")
+        visible: false
         font.pixelSize: 16
     }
 
     Text {
-        id: line
-        x: 223
-        y: 79
+        id: trainLinieText
+        x: 21
+        y: 129
         text: qsTr("Linie")
+        visible: false
         font.pixelSize: 16
     }
 
     Text {
         id: trainLine
-        x: 324
-        y: 79
+        x: 122
+        y: 129
         text: qsTr("S1")
+        visible: false
         font.pixelSize: 16
 
     }
     Text {
-        id: text5
-        x: 223
-        y: 104
+        id: directionText
+        x: 21
+        y: 154
         text: qsTr("Richtung")
+        visible: false
         font.pixelSize: 16
     }
 
     Text {
         id: direction
-        x: 324
-        y: 104
+        x: 122
+        y: 154
         text: qsTr("Graz")
+        visible: false
         font.pixelSize: 16
     }
 
     RowLayout {
         x: 21
-        y: 152
-        spacing: 25
+        anchors.top: offset.bottom
+        anchors.topMargin: 10
+        spacing: 20
 
         Button {
             id: monday
             text: qsTr("Mo")
+            checked: false
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -142,6 +153,8 @@ Item {
         Button {
             id: tuesday
             text: qsTr("Tu")
+            checked: false
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -154,6 +167,7 @@ Item {
         Button {
             id: wendnesday
             text: qsTr("We")
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -166,6 +180,7 @@ Item {
         Button {
             id: thursday
             text: qsTr("Th")
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -178,6 +193,7 @@ Item {
         Button {
             id: friday
             text: qsTr("Fr")
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -190,6 +206,7 @@ Item {
         Button {
             id: saturday
             text: qsTr("Sa")
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -202,6 +219,7 @@ Item {
         Button {
             id: sunday
             text: qsTr("Su")
+            highlighted: true
             autoRepeat: true
             checkable: true
             flat: true
@@ -209,6 +227,20 @@ Item {
                 radius: 100
                 antialiasing: true
             }
+
+        }
+    }
+
+    ToolButton {
+        id: more
+        x: 283
+        y: 13
+        highlighted: true
+        contentItem: Image {
+            fillMode: Image.Pad
+            horizontalAlignment: Image.AlignHCenter
+            verticalAlignment: Image.AlignVCenter
+            source: "qrc:/images/menu.png"
         }
     }
 }
