@@ -6,6 +6,9 @@ Item {
     id: item1
     width: 380
     height: 250
+    property alias buttonRow: buttonRow
+
+    property alias infoContainer: infoContainer
     property alias more: more
 
     property alias wendnesday: wendnesday
@@ -76,61 +79,62 @@ Item {
         font.pixelSize: 16
     }
 
-    Text {
-        id: stationText
-        x: 21
-        y: 104
-        text: qsTr("Bahnhof")
+    Rectangle {
+        id: infoContainer
+        anchors.top: offset.bottom
+//        anchors.topMargin: -98
         visible: false
-        font.pixelSize: 16
-    }
+        Text {
+            id: stationText
+            x: 21
+            y: 104
+            text: qsTr("Bahnhof")
+            font.pixelSize: 16
+        }
 
-    Text {
-        id: station
-        x: 122
-        y: 104
-        text: qsTr("Gratwein")
-        visible: false
-        font.pixelSize: 16
-    }
+        Text {
+            id: station
+            x: 122
+            y: 104
+            text: qsTr("Gratwein")
+            font.pixelSize: 16
+        }
 
-    Text {
-        id: trainLinieText
-        x: 21
-        y: 129
-        text: qsTr("Linie")
-        visible: false
-        font.pixelSize: 16
-    }
+        Text {
+            id: trainLinieText
+            x: 21
+            y: 129
+            text: qsTr("Linie")
+            font.pixelSize: 16
+        }
 
-    Text {
-        id: trainLine
-        x: 122
-        y: 129
-        text: qsTr("S1")
-        visible: false
-        font.pixelSize: 16
+        Text {
+            id: trainLine
+            x: 122
+            y: 129
+            text: qsTr("S1")
+            font.pixelSize: 16
 
-    }
-    Text {
-        id: directionText
-        x: 21
-        y: 154
-        text: qsTr("Richtung")
-        visible: false
-        font.pixelSize: 16
-    }
+        }
+        Text {
+            id: directionText
+            x: 21
+            y: 154
+            text: qsTr("Richtung")
+            font.pixelSize: 16
+        }
 
-    Text {
-        id: direction
-        x: 122
-        y: 154
-        text: qsTr("Graz")
-        visible: false
-        font.pixelSize: 16
+        Text {
+            id: direction
+            x: 122
+            y: 154
+            text: qsTr("Graz")
+            font.pixelSize: 16
+        }
     }
 
     RowLayout {
+        id: buttonRow
         x: 21
         anchors.top: offset.bottom
         anchors.topMargin: 10
