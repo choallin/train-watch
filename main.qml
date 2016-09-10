@@ -94,9 +94,11 @@ ApplicationWindow {
         }
 
         Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
+            ListView {
+                width: 200; height: 250
+
+                model: jsonDataModel
+                delegate: Text { text: model.display.title + " " + model.display.offset }
             }
         }
     }
