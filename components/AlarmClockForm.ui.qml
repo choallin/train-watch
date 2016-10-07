@@ -82,13 +82,15 @@ Item {
     GridLayout {
         id: buttonInfoContainer
         x: 21
+        visible: true
+        columns: 1
         anchors.top: offset.bottom
         anchors.topMargin: 10
         columnSpacing: 20
 
         GridLayout {
             id: infoContainer
-            visible: false
+            visible: true
             Layout.fillWidth: true
             columns: 2
 
