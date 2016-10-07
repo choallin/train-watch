@@ -4,17 +4,17 @@ Item {
 
     AlarmClockForm {
         id: alarmOverview
-        more.onClicked: showAdditionalInformation()
+        more.onClicked: toggleAdditionalInformation()
     }
 
-    function showAdditionalInformation() {
+    function toggleAdditionalInformation() {
+        console.log("bin in der action");
+        console.log(alarmOverview.infoContainer);
+        console.log(alarmOverview.infoContainer.visible);
         if (!alarmOverview.infoContainer.visible) {
-            alarmOverview.buttonRow.anchors.top = alarmOverview.infoContainer.bottom
+            console.log("versuche auf true zu setzen")
             alarmOverview.infoContainer.visible = true
         } else {
-            alarmOverview.buttonRow.anchors.top = alarmOverview.offset.bottom
-            alarmOverview.buttonRow.anchors.topMargin = 10
-
             alarmOverview.infoContainer.visible = false
         }
 

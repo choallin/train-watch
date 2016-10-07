@@ -1,12 +1,11 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
+import QtQuick.Layouts 1.3
 
 Item {
     id: item1
     width: 380
     height: 250
-    property alias buttonRow: buttonRow
 
     property alias infoContainer: infoContainer
     property alias more: more
@@ -79,159 +78,153 @@ Item {
         font.pixelSize: 16
     }
 
-    Rectangle {
-        id: infoContainer
-        anchors.top: offset.bottom
-//        anchors.topMargin: -98
-        visible: false
-        Text {
-            id: stationText
-            x: 21
-            y: 104
-            text: qsTr("Bahnhof")
-            font.pixelSize: 16
-        }
 
-        Text {
-            id: station
-            x: 122
-            y: 104
-            text: qsTr("Gratwein")
-            font.pixelSize: 16
-        }
-
-        Text {
-            id: trainLinieText
-            x: 21
-            y: 129
-            text: qsTr("Linie")
-            font.pixelSize: 16
-        }
-
-        Text {
-            id: trainLine
-            x: 122
-            y: 129
-            text: qsTr("S1")
-            font.pixelSize: 16
-
-        }
-        Text {
-            id: directionText
-            x: 21
-            y: 154
-            text: qsTr("Richtung")
-            font.pixelSize: 16
-        }
-
-        Text {
-            id: direction
-            x: 122
-            y: 154
-            text: qsTr("Graz")
-            font.pixelSize: 16
-        }
-    }
-
-    RowLayout {
-        id: buttonRow
+    GridLayout {
+        id: buttonInfoContainer
         x: 21
         anchors.top: offset.bottom
         anchors.topMargin: 10
-        spacing: 20
+        columnSpacing: 20
 
-        Button {
-            id: monday
-            text: qsTr("Mo")
-            checked: false
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
+        GridLayout {
+            id: infoContainer
+            visible: false
+            Layout.fillWidth: true
+            columns: 2
+
+            Text {
+                id: stationText
+                text: qsTr("Bahnhof")
+                font.pixelSize: 16
+            }
+
+            Text {
+                id: station
+                text: qsTr("Gratwein")
+                font.pixelSize: 16
+            }
+
+            Text {
+                id: trainLinieText
+                text: qsTr("Linie")
+                font.pixelSize: 16
+            }
+
+            Text {
+                id: trainLine
+                text: qsTr("S1")
+                font.pixelSize: 16
+
+            }
+            Text {
+                id: directionText
+                text: qsTr("Richtung")
+                font.pixelSize: 16
+            }
+
+            Text {
+                id: direction
+                text: qsTr("Graz")
+                font.pixelSize: 16
             }
         }
 
-        Button {
-            id: tuesday
-            text: qsTr("Tu")
-            checked: false
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
-            }
-        }
+        RowLayout {
+            Layout.fillWidth: true
 
-        Button {
-            id: wendnesday
-            text: qsTr("We")
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
-            }
-        }
-
-        Button {
-            id: thursday
-            text: qsTr("Th")
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
-            }
-        }
-
-        Button {
-            id: friday
-            text: qsTr("Fr")
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
-            }
-        }
-
-        Button {
-            id: saturday
-            text: qsTr("Sa")
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
-            }
-        }
-
-        Button {
-            id: sunday
-            text: qsTr("Su")
-            highlighted: true
-            autoRepeat: true
-            checkable: true
-            flat: true
-            background: Rectangle {
-                radius: 100
-                antialiasing: true
+            Button {
+                id: monday
+                text: qsTr("Mo")
+                checked: false
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
             }
 
+            Button {
+                id: tuesday
+                text: qsTr("Tu")
+                checked: false
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
+            }
+
+            Button {
+                id: wendnesday
+                text: qsTr("We")
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
+            }
+
+            Button {
+                id: thursday
+                text: qsTr("Th")
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
+            }
+
+            Button {
+                id: friday
+                text: qsTr("Fr")
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
+            }
+
+            Button {
+                id: saturday
+                text: qsTr("Sa")
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
+            }
+
+            Button {
+                id: sunday
+                text: qsTr("Su")
+                highlighted: true
+                autoRepeat: true
+                checkable: true
+                flat: true
+                background: Rectangle {
+                    radius: 100
+                    antialiasing: true
+                }
+
+            }
         }
     }
 
