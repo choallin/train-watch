@@ -90,7 +90,7 @@ Item {
 
         GridLayout {
             id: infoContainer
-            visible: true
+            visible: false
             Layout.fillWidth: true
             columns: 2
 
