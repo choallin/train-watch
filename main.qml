@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
+import FileIO 1.0
+import AppDataDir 1.0
 import "components" as TwComponents
 
 ApplicationWindow {
@@ -15,6 +17,12 @@ ApplicationWindow {
     Material.primary: Material.LightBlue
     Material.accent: Material.Purple
     Material.primary: Material.Purple
+
+
+    FileIO {
+        id: settings
+        source: AppDataDir.getPath(AppDataDir.AppDataLocation) + "test.json"
+    }
 
     header: ToolBar {
         RowLayout {
