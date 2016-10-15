@@ -7,5 +7,9 @@
         <file>components/MainClockForm.ui.qml</file>
         <file>components/AlarmClock.qml</file>
         <file>components/AlarmClockForm.ui.qml</file>
+        <file>components/CreateWatch.qml</file>
+        <file>components/CreateWatchForm.ui.qml</file>
+        <file>components/TumblerTimeEdit.qml</file>
+        <file>components/TumblerTimeEditForm.ui.qml</file>
     </qresource>
 </RCC>
