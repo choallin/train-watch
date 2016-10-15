@@ -6,5 +6,6 @@
         <file>images/menu.png</file>
         <file>images/point.png</file>
         <file>images/arrow_back.png</file>
+        <file>misc/exampleJsonData.json</file>
     </qresource>
 </RCC>
