@@ -1,16 +1,11 @@
 import QtQuick 2.7
+// import "MainClockForm"
 
 Item {
-    anchors.fill: parent
-    Timer {
-        interval: 500
-        running: true
-        repeat: true
-        onTriggered: clockTrigger()
-    }
-
+    width: parent.width
     MainClockForm {
         id: mainClock
+        width: parent.width
 
         trains: ListModel{
             id: model
@@ -20,16 +15,13 @@ Item {
             ListElement {
                 trainData: qsTr("multiple trains")
             }
+            ListElement {
+                trainData: qsTr("multiple trains more")
+            }
+            ListElement {
+                trainData: qsTr("multiple trains still more")
+            }
         }
-    }
-    function clockTrigger() {
-        var date = new Date();
-        // date representation has to be localized
-        mainClock.date = date.getDate().toString() + "." + date.getMonth().toString() + "." + date.getFullYear().toString()
-        mainClock.minuteRotation = 6 * date.getMinutes()
-        mainClock.hourRotation = 30 * date.getHours()
-
-        // API call to get the next train and set mainClock.train
     }
 }
 

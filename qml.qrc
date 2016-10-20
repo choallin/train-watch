@@ -7,5 +7,6 @@
         <file>components/MainClockForm.ui.qml</file>
         <file>components/AlarmClock.qml</file>
         <file>components/AlarmClockForm.ui.qml</file>
+        <file>components/Clock.qml</file>
     </qresource>
 </RCC>

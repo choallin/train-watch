@@ -22,7 +22,8 @@ include(deployment.pri)
 
 DISTFILES += \
     components/AlarmClock.qml \
-    components/AlarmClockForm.ui.qml
+    components/AlarmClockForm.ui.qml \
+    components/Clock.qml
 
 HEADERS += \
     fileio.h \
