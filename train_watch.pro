@@ -5,7 +5,9 @@ QT += qml quick quickcontrols2
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    fileio.cpp
+    fileio.cpp \
+    dataModels/jsondatamodel.cpp \
+    data/jsondata.cpp
 
 OTHER_FILES += \
     main.qml \
@@ -28,4 +30,6 @@ DISTFILES += \
 HEADERS += \
     fileio.h \
     appdata/appdatadirutility.h \
-    appdata/appdatadir.h
+    appdata/appdatadir.h \
+    dataModels/jsondatamodel.h \
+    data/jsondata.h

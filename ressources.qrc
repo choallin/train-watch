@@ -16,5 +16,6 @@
         <file>images/minute.png</file>
         <file>images/quit.png</file>
         <file>images/second.png</file>
+        <file>misc/exampleJsonData.json</file>
     </qresource>
 </RCC>

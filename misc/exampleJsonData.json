@@ -1,0 +1,35 @@
+{
+    "version": "0.0.1",
+    "phone": "00435421454",
+    "default-country": "AT",
+    "watches": [
+        {
+            "title": "Hello World",
+            "offset": 20,
+            "departure": "07:00",
+            "active": true,
+            "weekdays": [1,2,3,4,5]
+        },
+        {
+            "title": "Hello Mars",
+            "offset": 45,
+            "departure": "09:00",
+            "active": true,
+            "weekdays": [1,2,3]
+        },
+        {
+            "title": "Hello Pluto",
+            "offset": 60,
+            "departure": "06:11",
+            "active": false,
+            "weekdays": [1,2,3]
+        },
+        {
+            "title": "Hello Saturn",
+            "offset": 60,
+            "departure": "06:11",
+            "active": false,
+            "weekdays": [1,2,3]
+        }
+    ]
+}

@@ -11,25 +11,24 @@
 			"file": "components/AlarmClock.qml",
 			"settings":
 			{
-				"buffer_size": 501,
+				"buffer_size": 381,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/choallin/Qt/Examples/Qt-5.7/quick/demos/clocks/content/Clock.qml",
+			"file": "components/MainClock.qml",
 			"settings":
 			{
-				"buffer_size": 4857,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"buffer_size": 585,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "components/AlarmClockForm.ui.qml",
 			"settings":
 			{
-				"buffer_size": 6056,
+				"buffer_size": 5587,
 				"line_ending": "Unix"
 			}
 		},
@@ -37,8 +36,16 @@
 			"file": "components/MainClockForm.ui.qml",
 			"settings":
 			{
-				"buffer_size": 2439,
+				"buffer_size": 683,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "components/Clock.qml",
+			"settings":
+			{
+				"buffer_size": 2217,
 				"line_ending": "Unix"
 			}
 		}
@@ -50,10 +57,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 52.0,
-		"last_filter": "ssqm",
+		"height": 392.0,
+		"last_filter": "reind",
 		"selected_items":
 		[
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"minipa",
+				"View: Toggle Minimap"
+			],
 			[
 				"ssqm",
 				"Set Syntax: QML"
@@ -88,12 +103,13 @@
 	},
 	"file_history":
 	[
+		"/home/choallin/Qt/Examples/Qt-5.7/quick/demos/clocks/content/Clock.qml",
 		"/home/choallin/code/train_watch/.gitignore",
 		"/home/choallin/Qt/Examples/Qt-5.7/quick/demos/clocks/clocks.qml"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -135,15 +151,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 501,
+						"buffer_size": 381,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								377,
-								377
+								376,
+								376
 							]
 						],
 						"settings":
@@ -168,7 +184,7 @@
 								"partial_sequence": "",
 								"register": "\"",
 								"sequence": "",
-								"xpos": 12
+								"xpos": 4
 							}
 						},
 						"translation.x": 0.0,
@@ -180,32 +196,31 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/home/choallin/Qt/Examples/Qt-5.7/quick/demos/clocks/content/Clock.qml",
+					"file": "components/MainClock.qml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4857,
+						"buffer_size": 585,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4075,
-								4075
+								78,
+								78
 							]
 						],
 						"settings":
 						{
-							"git_savvy.file_path": "/home/choallin/Qt/Examples/Qt-5.7/quick/demos/clocks/content/Clock.qml",
+							"git_savvy.file_path": "/home/choallin/code/train_watch/components/MainClock.qml",
+							"git_savvy.repo_path": "/home/choallin/code/train_watch",
+							"highlight_line": false,
 							"syntax": "Packages/QML/Support/QML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true,
 							"vintage":
 							{
-								"_vintageous_glue_until_normal_mode": false,
-								"_vintageous_non_interactive": false,
-								"_vintageous_processing_notation": false,
 								"action": null,
 								"action_count": "",
 								"mode": "mode_normal",
@@ -219,7 +234,7 @@
 							}
 						},
 						"translation.x": 0.0,
-						"translation.y": 1404.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -237,15 +252,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6056,
+						"buffer_size": 5587,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1981,
-								1981
+								49,
+								49
 							]
 						],
 						"settings":
@@ -269,11 +284,11 @@
 								"partial_sequence": "",
 								"register": "\"",
 								"sequence": "",
-								"xpos": 12
+								"xpos": 2
 							}
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1404.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -285,27 +300,30 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2439,
+						"buffer_size": 683,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2091,
-								2091
+								247,
+								247
 							]
 						],
 						"settings":
 						{
 							"git_savvy.file_path": "/home/choallin/code/train_watch/components/MainClockForm.ui.qml",
 							"git_savvy.repo_path": "/home/choallin/code/train_watch",
+							"highlight_line": false,
 							"syntax": "Packages/QML/Support/QML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true,
 							"vintage":
 							{
 								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_non_interactive": false,
+								"_vintageous_processing_notation": false,
 								"action": null,
 								"action_count": "",
 								"mode": "mode_normal",
@@ -316,14 +334,59 @@
 								"partial_sequence": "",
 								"register": "\"",
 								"sequence": "",
-								"xpos": 52
+								"xpos": 15
 							}
 						},
 						"translation.x": 0.0,
-						"translation.y": 918.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "components/Clock.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2217,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2217,
+								2217
+							]
+						],
+						"settings":
+						{
+							"git_savvy.file_path": "/home/choallin/code/train_watch/components/Clock.qml",
+							"git_savvy.repo_path": "/home/choallin/code/train_watch",
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": true,
+								"action": null,
+								"action_count": "",
+								"mode": "mode_insert",
+								"motion": null,
+								"motion_count": "",
+								"must_capture_register_name": false,
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"sequence": "",
+								"xpos": 4
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 234.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -417,10 +480,10 @@
 		"_vintageous_reset_during_init": true,
 		"vintage":
 		{
-			"_cmdline_cd": "/home/choallin/Qt/Examples/Qt-5.7/quick/demos/clocks/content"
+			"_cmdline_cd": "/home/choallin/code/train_watch/components"
 		}
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
