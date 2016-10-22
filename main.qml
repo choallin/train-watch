@@ -12,11 +12,18 @@ ApplicationWindow {
     //title: qsTr("Train Watch")
 
     id: root
+    //static const QStringList materialPurple{"#E1BEE7", "#9C27B0", "#7B1FA2", "#000000", "#FFFFFF", "#FFFFFF", "black", "white", "white"};
+    //return QStringList{thePalette.at(1), thePalette.at(4), thePalette.at(7)};
+
+    property bool isLandscape: width > height
+
+    property color primaryColor: "#E1BEE7"
+    property color primaryDarkColor: "#9C27B0"
+    property color accentColor: "#9C27B0"
 
     Material.theme: Material.Light
-    Material.accent: Material.Purple
-    Material.primary: Material.Purple
-
+    Material.accent: accentColor
+    Material.primary: primaryColor
 
     FileIO {
         id: settings
