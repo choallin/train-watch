@@ -11,5 +11,9 @@
         <file>components/CreateWatchForm.ui.qml</file>
         <file>components/TumblerTimeEdit.qml</file>
         <file>components/TumblerTimeEditForm.ui.qml</file>
+        <file>popups/TimePicker.qml</file>
+        <file>guiItems/ButtonIconActive.qml</file>
+        <file>guiItems/ButtonFlat.qml</file>
+        <file>guiItems/IconActive.qml</file>
     </qresource>
 </RCC>

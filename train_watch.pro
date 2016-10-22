@@ -25,6 +25,7 @@ include(deployment.pri)
 DISTFILES += \
     components/AlarmClock.qml \
     components/AlarmClockForm.ui.qml \
+    popups/TimePicker.qml
 
 HEADERS += \
     fileio.h \
