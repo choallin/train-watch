@@ -8,11 +8,12 @@ Item {
     }
 
     function toggleAdditionalInformation() {
-        if (!alarmOverview.infoContainer.visible) {
-            alarmOverview.infoContainer.visible = true
-        } else {
-            alarmOverview.infoContainer.visible = false
-        }
+        alarmOverview.isExpanded = !alarmOverview.isExpanded
+//        if (!alarmOverview.infoContainer.visible) {
+//            alarmOverview.infoContainer.visible = true
+//        } else {
+//            alarmOverview.infoContainer.visible = false
+//        }
 
     }
 }

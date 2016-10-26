@@ -3,10 +3,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 Item {
-    id: item1
+    id: root
     width: 380
     height: 250
 
+    property bool isExpanded: false
     property alias infoContainer: infoContainer
     property alias more: more
 
@@ -81,8 +82,8 @@ Item {
 
     GridLayout {
         id: buttonInfoContainer
+        // visible: root.isExpanded
         x: 21
-        visible: true
         columns: 1
         anchors.top: offset.bottom
         anchors.topMargin: 10
@@ -90,7 +91,7 @@ Item {
 
         GridLayout {
             id: infoContainer
-            visible: false
+            visible: root.isExpanded
             Layout.fillWidth: true
             columns: 2
 
@@ -133,6 +134,7 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
+            visible: root.isExpanded
 
             Button {
                 id: monday
