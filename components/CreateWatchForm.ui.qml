@@ -9,7 +9,8 @@ Item {
     width: 400
     height: 400
     property alias txtTitle: txtTitle
-    property alias txtPickupTime: txtPickupTime
+    property alias lblTime: lblTime
+    property alias lblTimeArea: lblTimeArea
 
     GridLayout {
         anchors.rightMargin: 20
@@ -42,62 +43,53 @@ Item {
             Layout.fillHeight: false
         }
 
-        TumblerTimeEdit {
-            id: tumblerTimeEdit1
-            visible: false
-        }
-
         TextField {
             id: txtStation
             Layout.fillWidth: true
             placeholderText: qsTr("Station")
         }
 
-        TextField {
-            id: txtPickupTime
-            placeholderText: qsTr("Time")
+        Label {
+            id: lblTime
+            x: 111
+            y: 378
+            text: "Time"
             Layout.fillWidth: true
+
+            MouseArea {
+                id: lblTimeArea
+                anchors.fill: parent
+            }
+        }
+
+        TextField {
+            id: txtLine
+            placeholderText: qsTr("Line")
+            Layout.fillWidth: true
+        }
+
+        RowLayout {
+            id: rowLayout1
+            x: 47
+            y: 388
+            width: 100
+            height: 100
+            Layout.fillHeight: false
+            Layout.fillWidth: true
+
+            Label {
+                id: lblOffset
+                text: qsTr("Offset(minutes):")
+            }
+
+            SpinBox {
+                id: spOffset
+                value: 20
+                editable: false
+            }
+
         }
 
 
     }
-    states: [
-        State {
-            name: "State1"
-
-            PropertyChanges {
-                target: txtTitle
-                visible: false
-            }
-
-            PropertyChanges {
-                target: swActive
-                visible: false
-            }
-
-            PropertyChanges {
-                target: txtCountry
-                visible: false
-            }
-
-            PropertyChanges {
-                target: txtStation
-                visible: false
-            }
-
-            PropertyChanges {
-                target: txtPickupTime
-                visible: false
-            }
-
-            PropertyChanges {
-                target: tumblerTimeEdit1
-                width: 200
-                height: 142
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                Layout.fillWidth: true
-                visible: true
-            }
-        }
-    ]
 }
