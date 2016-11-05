@@ -7,5 +7,13 @@
         <file>images/point.png</file>
         <file>images/arrow_back.png</file>
         <file>misc/exampleJsonData.json</file>
+        <file>images/black/work.png</file>
+        <file>images/black/work@2x.png</file>
+        <file>images/black/work@3x.png</file>
+        <file>images/black/work@4x.png</file>
+        <file>images/black/time.png</file>
+        <file>images/black/time@2x.png</file>
+        <file>images/black/time@3x.png</file>
+        <file>images/black/time@4x.png</file>
     </qresource>
 </RCC>

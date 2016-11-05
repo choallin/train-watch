@@ -4,13 +4,14 @@ import QtQuick.Layouts 1.0
 import QtQuick.Extras 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.0
+import "../guiItems"
 
 Item {
     width: 400
     height: 400
     property alias txtTitle: txtTitle
     property alias lblTime: lblTime
-    property alias lblTimeArea: lblTimeArea
+    property alias btnPickUpTime: btnPickUpTime
 
     GridLayout {
         anchors.rightMargin: 20
@@ -49,16 +50,21 @@ Item {
             placeholderText: qsTr("Station")
         }
 
-        Label {
-            id: lblTime
-            x: 111
-            y: 378
-            text: "Time"
+        RowLayout {
+            id: rowLayout2
+            width: 100
+            height: 100
             Layout.fillWidth: true
 
-            MouseArea {
-                id: lblTimeArea
-                anchors.fill: parent
+            Label {
+                id: lblTime
+                text: qsTr("Pick-Up Time")
+            }
+
+            ButtonIconActive {
+                id: btnPickUpTime
+                visible: true
+                imageName: "time.png"
             }
         }
 
@@ -89,7 +95,5 @@ Item {
             }
 
         }
-
-
     }
 }

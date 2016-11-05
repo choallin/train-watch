@@ -2,7 +2,7 @@ import QtQuick 2.4
 
 CreateWatchForm {
 
-    lblTimeArea.onClicked: function() {
+    btnPickUpTime.onClicked: function() {
         pickTime();
     }
 
@@ -13,7 +13,7 @@ CreateWatchForm {
         source: "../popups/TimePicker.qml"
         onLoaded: {
             item.modal = true
-            item.titleText = qsTr("Pickup Time")
+            item.titleText = qsTr("Pick-Up Time")
             item.open()
             item.setDisplay("10:00", false, true)
         }
@@ -38,5 +38,9 @@ CreateWatchForm {
         } else {
             timePickerLoader.active = true
         }
+    }
+
+    function saveWatchItem() {
+        console.log("saveWatchItem");
     }
 }

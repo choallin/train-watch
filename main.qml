@@ -6,24 +6,34 @@ import QtQuick.Layouts 1.3
 import FileIO 1.0
 import AppDataDir 1.0
 import "components" as TwComponents
+import "guiItems"
+import "popups"
 
 ApplicationWindow {
+    id: appWindow
     visible: true
     //title: qsTr("Train Watch")
 
-    id: root
-    //static const QStringList materialPurple{"#E1BEE7", "#9C27B0", "#7B1FA2", "#000000", "#FFFFFF", "#FFFFFF", "black", "white", "white"};
-    //return QStringList{thePalette.at(1), thePalette.at(4), thePalette.at(7)};
+    //materialPurple{"#E1BEE7", "#9C27B0", "#7B1FA2", "#000000", "#FFFFFF", "#FFFFFF", "black", "white", "white"};
+    //lightPalette{"#000000", "#FFFFFF", "0.87", "0.54", "0.12", "0.54", "0.26", "black", "0", "#424242", "#424242", "1.0", "0.7", "#323232", "0.75"};
 
     property bool isLandscape: width > height
 
+    //set some constants
     property color primaryColor: "#E1BEE7"
     property color primaryDarkColor: "#9C27B0"
     property color accentColor: "#9C27B0"
+    property color textOnPrimaryDark: "#FFFFFF"
+    property color textOnPrimaryLight: "#000000"
+    property color textOnPrimary: "#FFFFFF"
+    property color cardAndDialogBackground: "#FFFFFF"
+    property real iconActiveOpacity: 0.54
+    property string iconFolder: "black"
+    property alias contextButton: contextButton
 
     Material.theme: Material.Light
-    Material.accent: accentColor
-    Material.primary: primaryColor
+    Material.accent: Material.Purple
+    Material.primary: Material.Purple
 
     FileIO {
         id: settings
@@ -43,7 +53,9 @@ ApplicationWindow {
                     verticalAlignment: Image.AlignVCenter
                     source: "qrc:/images/drawer.png"
                 }
-                //onClicked:
+                onClicked: {
+                    createWatchForm.saveWatchItem();
+                }
             }
 
             Label {
@@ -101,11 +113,8 @@ ApplicationWindow {
         }
 
         Page {
-            ListView {
-                width: 200; height: 250
-
-                model: jsonDataModel
-                delegate: Text { text: model.display.title + " " + model.display.offset }
+            TwComponents.CreateWatch {
+                id: createWatchForm
             }
         }
     }
