@@ -9,6 +9,7 @@
 #include "fileio.h"
 #include "data/jsondata.h"
 #include "dataModels/jsondatamodel.h"
+#include "appinterface.h"
 
 void createExampleJsonFile(const QString& filePath)
 {
@@ -47,8 +48,22 @@ int main(int argc, char *argv[])
     JsonDataModel* jsonDataModel = new JsonDataModel(&app, jsonData);
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("jsonDataModel", jsonDataModel);
+    QQmlContext* context = engine.rootContext();
+
+    context->setContextProperty("jsonDataModel", jsonDataModel);
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+
+
+
+
+    AppInterface api;
+
+    // from QML we have access to ApplicationUI as myApp
+    context->setContextProperty("myApp", &api);
+    // some more context properties
+    api.addContextProperty(context);
+
+
 
     return app.exec();
 }
