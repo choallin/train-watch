@@ -1,6 +1,8 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
+#include <QObject>
+
 #include "../dataClasses/watchitem.h"
 
 class DataManager: public QObject

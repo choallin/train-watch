@@ -51,10 +51,6 @@ int main(int argc, char *argv[])
     QQmlContext* context = engine.rootContext();
 
     context->setContextProperty("jsonDataModel", jsonDataModel);
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-
-
-
 
     AppInterface api;
 
@@ -63,6 +59,7 @@ int main(int argc, char *argv[])
     // some more context properties
     api.addContextProperty(context);
 
+    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
 
     return app.exec();

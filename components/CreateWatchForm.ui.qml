@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Extras 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.0
+import org.trainwatch.data 1.0
 import "../guiItems"
 
 Item {
@@ -12,6 +13,7 @@ Item {
     property alias txtTitle: txtTitle
     property alias lblTime: lblTime
     property alias btnPickUpTime: btnPickUpTime
+    property WatchItem watchItem
 
     GridLayout {
         anchors.rightMargin: 20
@@ -90,7 +92,7 @@ Item {
 
             SpinBox {
                 id: spOffset
-                value: 20
+                value: test.offset
                 editable: false
             }
 
