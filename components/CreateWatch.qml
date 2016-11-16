@@ -19,9 +19,18 @@ CreateWatchForm {
         }
     }
 
+    Binding {
+        target: watchItem
+        property: "title"
+        value: txtTitle.text
+    }
+
     Connections {
         target: timePickerLoader.item
         onClosed: timePickerClosed()
+    }
+
+    function init() {
     }
 
     function timePickerClosed() {

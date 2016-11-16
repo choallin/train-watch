@@ -29,6 +29,7 @@ Item {
             id: txtTitle
             placeholderText: qsTr("Title")
             Layout.fillWidth: true
+            text: watchItem.title
         }
 
         Switch {
@@ -44,12 +45,14 @@ Item {
             placeholderText: qsTr("Country")
             Layout.fillWidth: true
             Layout.fillHeight: false
+            text: watchItem.country
         }
 
         TextField {
             id: txtStation
             Layout.fillWidth: true
             placeholderText: qsTr("Station")
+            text: watchItem.station
         }
 
         RowLayout {
@@ -74,6 +77,7 @@ Item {
             id: txtLine
             placeholderText: qsTr("Line")
             Layout.fillWidth: true
+            text: watchItem.line
         }
 
         RowLayout {
@@ -92,7 +96,7 @@ Item {
 
             SpinBox {
                 id: spOffset
-                value: test.offset
+                value: watchItem.offset
                 editable: false
             }
 

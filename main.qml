@@ -105,6 +105,7 @@ ApplicationWindow {
             }
             else {
                 contextButton.contentItem.source = "qrc:/images/arrow_back.png"
+                createWatchFormLoader.setSource("../components/CreateWatch.qml", { watchItem: dataManager.createWatchItem() })
             }
 
         }
@@ -113,8 +114,8 @@ ApplicationWindow {
         }
 
         Page {
-            TwComponents.CreateWatch {
-                id: createWatchForm
+            Loader {
+                id: createWatchFormLoader
             }
         }
     }
