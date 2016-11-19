@@ -54,7 +54,7 @@ ApplicationWindow {
                     source: "qrc:/images/drawer.png"
                 }
                 onClicked: {
-                    createWatchForm.saveWatchItem();
+                    createWatchFormLoader.item.saveWatchItem();
                 }
             }
 
@@ -96,7 +96,7 @@ ApplicationWindow {
     }
 
     SwipeView {
-        id: swipeView
+        id: rootView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
         onCurrentIndexChanged: function() {
@@ -123,7 +123,7 @@ ApplicationWindow {
     footer: TabBar {
         Material.foreground: white
         id: tabBar
-        currentIndex: swipeView.currentIndex
+        currentIndex: rootView.currentIndex
         TabButton {
             text: qsTr("Overview")
         }
@@ -131,4 +131,24 @@ ApplicationWindow {
             text: qsTr("Add")
         }
     }
+
+    //ApplicationWindow functions
+    function resetFocus() {
+        rootView.focus = true;
+    }
+
+    function showInfo(info) {
+        popupInfo.text = info;
+        popupInfo.buttonText = qsTr("OK");
+        popupInfo.open();
+    }
+
+    //ApplicationWindow popups
+    PopupInfo {
+        id: popupInfo
+        onAboutToHide: {
+            popupInfo.stopTimer();
+            resetFocus();
+        }
+    } // popupInfo
 }

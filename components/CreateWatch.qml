@@ -24,6 +24,36 @@ CreateWatchForm {
         property: "title"
         value: txtTitle.text
     }
+    Binding {
+        target: watchItem
+        property: "active"
+        value: swActive.checked
+    }
+    Binding {
+        target: watchItem
+        property: "country"
+        value: txtCountry.text
+    }
+    Binding {
+        target: watchItem.station
+        property: "name"
+        value: txtStation.text
+    }
+    Binding {
+        target: watchItem
+        property: "pickUpTime"
+        value: lblTime.text
+    }
+    Binding {
+        target: watchItem
+        property: "line"
+        value: txtLine.text
+    }
+    Binding {
+        target: watchItem
+        property: "offset"
+        value: spOffset.value
+    }
 
     Connections {
         target: timePickerLoader.item
@@ -35,7 +65,6 @@ CreateWatchForm {
 
     function timePickerClosed() {
         if(timePickerLoader.item.isOK) {
-            console.log("timePicker OK");
             lblTime.text = timePickerLoader.item.hrsDisplay+":"+timePickerLoader.item.minutesDisplay
         }
     }
@@ -50,6 +79,11 @@ CreateWatchForm {
     }
 
     function saveWatchItem() {
-        console.log("saveWatchItem");
+        if(!watchItem.isValid()) {
+            showInfo(qsTr("The Watch-Item could not be created.\nPlease check your inputs."));
+        }
+        else {
+            dataManager.appendWatchItem(watchItem);
+        }
     }
 }

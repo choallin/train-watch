@@ -11,7 +11,12 @@ Item {
     width: 400
     height: 400
     property alias txtTitle: txtTitle
+    property alias swActive: swActive
+    property alias txtCountry: txtCountry
+    property alias txtStation: txtStation
     property alias lblTime: lblTime
+    property alias txtLine: txtLine
+    property alias spOffset: spOffset
     property alias btnPickUpTime: btnPickUpTime
     property WatchItem watchItem
 
@@ -38,6 +43,7 @@ Item {
             Layout.fillWidth: true
             Layout.preferredHeight: 40
             Layout.preferredWidth: 200
+            checked: watchItem.active
         }
 
         TextField {
@@ -52,7 +58,7 @@ Item {
             id: txtStation
             Layout.fillWidth: true
             placeholderText: qsTr("Station")
-            text: watchItem.station
+            text: watchItem.station.name
         }
 
         RowLayout {
@@ -63,7 +69,7 @@ Item {
 
             Label {
                 id: lblTime
-                text: qsTr("Pick-Up Time")
+                text: watchItem.pickUpTime
             }
 
             ButtonIconActive {

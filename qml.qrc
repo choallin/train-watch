@@ -15,5 +15,7 @@
         <file>guiItems/ButtonIconActive.qml</file>
         <file>guiItems/ButtonFlat.qml</file>
         <file>guiItems/IconActive.qml</file>
+        <file>popups/PopupInfo.qml</file>
+        <file>guiItems/LabelSubheading.qml</file>
     </qresource>
 </RCC>

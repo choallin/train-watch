@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     data/jsondata.cpp \
     dataClasses/watchitem.cpp \
     appinterface.cpp \
-    data/datamanager.cpp
+    data/datamanager.cpp \
+    dataClasses/station.cpp
 
 OTHER_FILES += \
     main.qml \
@@ -37,4 +38,5 @@ HEADERS += \
     data/jsondata.h \
     dataClasses/watchitem.h \
     appinterface.h \
-    data/datamanager.h
+    data/datamanager.h \
+    dataClasses/station.h
