@@ -56,6 +56,8 @@ public:
     Q_INVOKABLE
     QString toString() const;
 
+    void fillFromCacheMap(const QVariantMap& map);
+
     Q_INVOKABLE
     bool isValid() const;
 

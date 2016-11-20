@@ -28,3 +28,9 @@ QString Station::toString() const
             .arg(m_uuid)
             .arg(m_name);
 }
+
+void Station::fillFromCacheMap(const QVariantMap& map)
+{
+    m_uuid = map.value("uuid").toString();
+    m_name = map.value("name").toString();
+}

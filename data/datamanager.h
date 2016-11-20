@@ -12,9 +12,16 @@ class DataManager: public QObject
 
     Q_PROPERTY(QQmlListProperty<WatchItem> watchItemPropertyList READ watchItemPropertyList NOTIFY watchItemPropertyListChanged)
 
+private:
+    QString m_dataRoot;
+    QString m_dataPath;
+
 public:
     DataManager(QObject *parent = 0);
     ~DataManager();
+
+    Q_INVOKABLE
+    void initialize();
 
     QQmlListProperty<WatchItem> watchItemPropertyList();
 
@@ -30,7 +37,13 @@ signals:
     void deletedFromWatchItems(WatchItem* watchItem);
 
 private:
-    QList<QObject*> mWatchItems;
+    bool createPathsIfNotExists();
+    QString dataPath(const QString& filename);
+    QVariantList readfromCache(const QString& filename);
+
+    QList<QObject*> m_watchItems;
+
+    void initializeWatchItemsFromCache();
 
     static void appendToWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList, WatchItem* watchItem);
     static int watchItemPropertyCount(QQmlListProperty<WatchItem>* watchItemList);

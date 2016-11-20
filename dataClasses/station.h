@@ -30,6 +30,8 @@ public:
     Q_INVOKABLE
     QString toString() const;
 
+    void fillFromCacheMap(const QVariantMap& map);
+
 Q_SIGNALS:
     void uuidChanged(QString);
     void nameChanged(QString);

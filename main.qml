@@ -132,6 +132,10 @@ ApplicationWindow {
         }
     }
 
+    Component.onCompleted: {
+        dataManager.initialize();
+    }
+
     //ApplicationWindow functions
     function resetFocus() {
         rootView.focus = true;

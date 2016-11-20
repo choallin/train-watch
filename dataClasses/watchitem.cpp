@@ -49,3 +49,16 @@ bool WatchItem::isValid() const
            m_pickUpTime.isValid() &&
            m_offset >= 0;
 }
+
+void WatchItem::fillFromCacheMap(const QVariantMap& map)
+{
+    m_title = map.value("title").toString();
+    m_country = map.value("country").toString();
+    Station* station = new Station(this);
+    station->fillFromCacheMap(map.value("station").toMap());
+    setStation(station);
+    m_line = map.value("line").toString();
+    m_pickUpTime = map.value("pickUpTime").toTime();
+    m_offset = map.value("offset").toInt();
+    m_active = map.value("active").toBool();
+}
