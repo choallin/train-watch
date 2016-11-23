@@ -8,5 +8,15 @@
         <file>components/AlarmClock.qml</file>
         <file>components/AlarmClockForm.ui.qml</file>
         <file>components/Clock.qml</file>
+        <file>components/CreateWatch.qml</file>
+        <file>components/CreateWatchForm.ui.qml</file>
+        <file>components/TumblerTimeEdit.qml</file>
+        <file>components/TumblerTimeEditForm.ui.qml</file>
+        <file>popups/TimePicker.qml</file>
+        <file>guiItems/ButtonIconActive.qml</file>
+        <file>guiItems/ButtonFlat.qml</file>
+        <file>guiItems/IconActive.qml</file>
+        <file>popups/PopupInfo.qml</file>
+        <file>guiItems/LabelSubheading.qml</file>
     </qresource>
 </RCC>

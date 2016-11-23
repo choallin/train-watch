@@ -7,7 +7,11 @@ CONFIG += c++11
 SOURCES += main.cpp \
     fileio.cpp \
     dataModels/jsondatamodel.cpp \
-    data/jsondata.cpp
+    data/jsondata.cpp \
+    dataClasses/watchitem.cpp \
+    appinterface.cpp \
+    data/datamanager.cpp \
+    dataClasses/station.cpp
 
 OTHER_FILES += \
     main.qml \
@@ -32,4 +36,8 @@ HEADERS += \
     appdata/appdatadirutility.h \
     appdata/appdatadir.h \
     dataModels/jsondatamodel.h \
-    data/jsondata.h
+    data/jsondata.h \
+    dataClasses/watchitem.h \
+    appinterface.h \
+    data/datamanager.h \
+    dataClasses/station.h
