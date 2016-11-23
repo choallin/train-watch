@@ -6,7 +6,7 @@ WatchItem::WatchItem(QObject* parent) :
     QObject(parent),
     m_title(QString()),
     m_country(QString()),
-    m_station(new Station()),
+    m_station(new Station("1", "Station1")),
     m_line(QString()),
     m_pickUpTime(QTime(0,0,0)),
     m_offset(20),
@@ -20,12 +20,12 @@ WatchItem::~WatchItem()
 
 }
 
-QString WatchItem::toString() const
+QString WatchItem::toS() const
 {
     return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7)")
             .arg(m_title)
             .arg(m_country)
-            .arg(m_station ? m_station->toString() : "NULL")
+            .arg(m_station ? m_station->toS() : "NULL")
             .arg(m_line)
             .arg(m_pickUpTime.toString("hh:mm:ss"))
             .arg(m_offset)
@@ -61,4 +61,17 @@ void WatchItem::fillFromCacheMap(const QVariantMap& map)
     m_pickUpTime = map.value("pickUpTime").toTime();
     m_offset = map.value("offset").toInt();
     m_active = map.value("active").toBool();
+}
+
+QVariantMap WatchItem::toCacheMap() const
+{
+    QVariantMap map;
+    map.insert("title", title());
+    map.insert("country", country());
+    map.insert("station", station()->toCacheMap());
+    map.insert("line", line());
+    map.insert("pickUpTime", pickUpTime());
+    map.insert("offset", offset());
+    map.insert("active", active());
+    return map;
 }

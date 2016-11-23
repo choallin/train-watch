@@ -22,7 +22,7 @@ Station::~Station()
 
 }
 
-QString Station::toString() const
+QString Station::toS() const
 {
     return QString("Station(%1, %2)")
             .arg(m_uuid)
@@ -33,4 +33,12 @@ void Station::fillFromCacheMap(const QVariantMap& map)
 {
     m_uuid = map.value("uuid").toString();
     m_name = map.value("name").toString();
+}
+
+QVariantMap Station::toCacheMap() const
+{
+    QVariantMap map;
+    map.insert("uuid", uuid());
+    map.insert("name", name());
+    return map;
 }

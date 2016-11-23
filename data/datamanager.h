@@ -40,10 +40,12 @@ private:
     bool createPathsIfNotExists();
     QString dataPath(const QString& filename);
     QVariantList readfromCache(const QString& filename);
+    void writeToCache(const QString& filename, QVariantList& data);
 
     QList<QObject*> m_watchItems;
 
     void initializeWatchItemsFromCache();
+    void saveWatchItemsToCache();
 
     static void appendToWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList, WatchItem* watchItem);
     static int watchItemPropertyCount(QQmlListProperty<WatchItem>* watchItemList);

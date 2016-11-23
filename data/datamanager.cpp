@@ -83,6 +83,35 @@ QVariantList DataManager::readfromCache(const QString& filename)
     }
 }
 
+void DataManager::writeToCache(const QString& filename, QVariantList& data)
+{
+    QString cacheFilePath = dataPath(filename);
+    QJsonDocument jsonDoc = QJsonDocument::fromVariant(data);
+
+    QFile saveFile(cacheFilePath);
+    if (!saveFile.open(QIODevice::WriteOnly)) {
+        qWarning("Couldn't open file '%s' to write", qPrintable(cacheFilePath));
+        return;
+    }
+    qint64 bytesWritten = saveFile.write(jsonDoc.toJson(QJsonDocument::Compact));
+    saveFile.close();
+    qDebug("%s bytes written to %s", qPrintable(QString::number(bytesWritten)), qPrintable(cacheFilePath));
+}
+
+void DataManager::saveWatchItemsToCache()
+{
+    QVariantList cacheList;
+    qDebug("now saving %s WatchItems", qPrintable(QString::number(m_watchItems.size())));
+    QListIterator<QObject*> lit(m_watchItems);
+    while(lit.hasNext()){
+        const WatchItem* watchItem = static_cast<WatchItem*>(lit.next());
+        QVariantMap cacheMap;
+        cacheMap = watchItem->toCacheMap();
+        cacheList.append(cacheMap);
+    }
+    writeToCache("watchItems", cacheList);
+}
+
 void DataManager::initializeWatchItemsFromCache()
 {
     m_watchItems.clear();
@@ -98,7 +127,7 @@ void DataManager::initializeWatchItemsFromCache()
         m_watchItems.append(watchItem);
     }
 
-    qDebug() << "created WatchItem* #" << m_watchItems.size();
+    qDebug("%s watchItems created", qPrintable(QString::number(m_watchItems.size())));
 }
 
 WatchItem* DataManager::createWatchItem()
@@ -111,6 +140,7 @@ void DataManager::appendWatchItem(WatchItem* watchItem)
 {
     watchItem->setParent(this);
     m_watchItems.append(watchItem);
+    saveWatchItemsToCache();
     emit addedToWatchItems(watchItem);
     emit watchItemPropertyListChanged();
 }
@@ -152,10 +182,10 @@ WatchItem* DataManager::atWatchItemProperty(QQmlListProperty<WatchItem>* watchIt
         if(dataManager->m_watchItems.size() > pos){
             return static_cast<WatchItem*>(dataManager->m_watchItems.at(pos));
         }
-        qWarning() << "cannot get WatchItem* at pos " << pos << " size is " << dataManager->m_watchItems.size();
+        qWarning("cannot get WatchItem* at pos %s", qPrintable(QString::number(pos)));
     }
     else{
-        qWarning() << "cannot get WatchItem* at pos %s" << pos;
+        qWarning("cannot get WatchItem* at pos %s", qPrintable(QString::number(pos)));
     }
     return 0;
 }

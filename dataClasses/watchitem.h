@@ -54,9 +54,10 @@ public:
     inline void setActive(const int active) { m_active = active; }
 
     Q_INVOKABLE
-    QString toString() const;
+    QString toS() const;
 
     void fillFromCacheMap(const QVariantMap& map);
+    QVariantMap toCacheMap() const;
 
     Q_INVOKABLE
     bool isValid() const;

@@ -28,9 +28,10 @@ public:
     inline void setName(const QString& name) { m_name = name; }
 
     Q_INVOKABLE
-    QString toString() const;
+    QString toS() const;
 
     void fillFromCacheMap(const QVariantMap& map);
+    QVariantMap toCacheMap() const;
 
 Q_SIGNALS:
     void uuidChanged(QString);
