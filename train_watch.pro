@@ -11,7 +11,11 @@ SOURCES += main.cpp \
     dataClasses/watchitem.cpp \
     appinterface.cpp \
     data/datamanager.cpp \
-    dataClasses/station.cpp
+    dataClasses/station.cpp \
+    api/trainwatchapi.cpp \
+    lib/jsonapi/manager.cpp \
+    lib/jsonapi/deserializer/deserializer.cpp \
+    lib/jsonapi/deserializer/stationsdeserializer.cpp
 
 OTHER_FILES += \
     main.qml \
@@ -40,4 +44,8 @@ HEADERS += \
     dataClasses/watchitem.h \
     appinterface.h \
     data/datamanager.h \
-    dataClasses/station.h
+    dataClasses/station.h \
+    api/trainwatchapi.h \
+    lib/jsonapi/manager.h \
+    lib/jsonapi/deserializer/deserializer.h \
+    lib/jsonapi/deserializer/stationsdeserializer.h

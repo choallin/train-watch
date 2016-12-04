@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QJsonArray>
 
 #include "manager.h"
 
@@ -12,7 +13,7 @@ Manager* Manager::s_instance = 0;
 Manager::Manager(QObject *parent) :
     QObject(parent)
 {
-    registerDeserializer("stations", new StationsDeserializer());
+    registerDeserializer("station", new StationsDeserializer());
 }
 
 Manager::~Manager()
@@ -42,4 +43,25 @@ void Manager::registerDeserializer(const QString& type, Deserializer* deserializ
         return;
     }
     m_deserializerHash.insert(type, deserializer);
+}
+
+QList<QObject*> Manager::deserialize(const QJsonObject& jsonApiObject)
+{
+    QList<QObject*> objectList;
+    QJsonArray dataObjects = jsonApiObject.value("data").toArray();
+    if(dataObjects.isEmpty()){
+        return objectList;
+    }
+
+    QString type = dataObjects.first().toObject().value("type").toString();
+    Deserializer* deserializer = m_deserializerHash.value(dataObjects.first().toObject().value("type").toString(), 0);
+    if(!deserializer){
+        qWarning("no deserializer found for type '%s' at JSONAPI::Manager::deserialize", qPrintable(type));
+        return objectList;
+    }
+
+    foreach(const QJsonValue& value, dataObjects){
+        objectList.append(deserializer->deserialize(value));
+    }
+    return objectList;
 }

@@ -15,9 +15,9 @@ StationsDeserializer::~StationsDeserializer()
 
 QObject* StationsDeserializer::deserialize(const QJsonValue &json)
 {
-    QJsonObject jsonObject = json.toObject();
-    QString uuid = jsonObject.value("uuid").toString();
-    QString name = jsonObject.value("name").toString();
+    QJsonObject attributes = json.toObject().value("attributes").toObject();
+    QString uuid = attributes.value("uuid").toString();
+    QString name = attributes.value("name").toString();
 
     return new Station(uuid, name);
 }

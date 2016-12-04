@@ -16,6 +16,9 @@ namespace JSONAPI {
         static Manager& instance(QObject* parent = 0);
         ~Manager();
 
+    public:
+        QList<QObject*> deserialize(const QJsonObject& jsonApiObject);
+
     private:
         Manager(QObject* parent);
         static Manager *s_instance;

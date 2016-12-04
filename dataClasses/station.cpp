@@ -19,7 +19,7 @@ Station::Station(const QString& uuid, const QString& name, QObject *parent) :
 
 Station::~Station()
 {
-
+    qDebug() << "Station::~Station()";
 }
 
 QString Station::toS() const

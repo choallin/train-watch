@@ -5,6 +5,7 @@
 #include <QtQml>
 
 #include "data/datamanager.h"
+#include "api/trainwatchapi.h"
 
 class AppInterface : public QObject
 {
@@ -17,6 +18,7 @@ public:
 
 private:
      DataManager* mDataManager;
+     TrainWatchApi* mTrainWatchApi;
 };
 
 #endif // APPINTERFACE_H

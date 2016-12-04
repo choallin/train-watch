@@ -10,6 +10,7 @@
 #include "data/jsondata.h"
 #include "dataModels/jsondatamodel.h"
 #include "appinterface.h"
+#include "lib/jsonapi/manager.h"
 
 void createExampleJsonFile(const QString& filePath)
 {
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
 
     JsonData* jsonData = new JsonData(&app,trainWatchJsonPath);
     JsonDataModel* jsonDataModel = new JsonDataModel(&app, jsonData);
+    JSONAPI::Manager::instance(&app);
 
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
