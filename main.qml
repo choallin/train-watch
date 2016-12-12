@@ -8,132 +8,148 @@ import AppDataDir 1.0
 import "components" as TwComponents
 import "guiItems"
 import "popups"
+import "routing"
 
 ApplicationWindow {
     id: appWindow
     visible: true
     title: qsTr("Train Watch")
 
-    //materialPurple{"#E1BEE7", "#9C27B0", "#7B1FA2", "#000000", "#FFFFFF", "#FFFFFF", "black", "white", "white"};
-    //lightPalette{"#000000", "#FFFFFF", "0.87", "0.54", "0.12", "0.54", "0.26", "black", "0", "#424242", "#424242", "1.0", "0.7", "#323232", "0.75"};
-
     property bool isLandscape: width > height
 
-    //set some constants
-    property color primaryColor: "#E1BEE7"
-    property color primaryDarkColor: "#9C27B0"
-    property color accentColor: "#9C27B0"
-    property color textOnPrimaryDark: "#FFFFFF"
-    property color textOnPrimaryLight: "#000000"
-    property color textOnPrimary: "#FFFFFF"
-    property color cardAndDialogBackground: "#FFFFFF"
-    property real iconActiveOpacity: 0.54
-    property string iconFolder: "black"
-    property alias contextButton: contextButton
+    property variant primaryPalette: myApp.defaultPrimaryPalette()
+    property variant accentPalette: myApp.defaultAccentPalette()
+    property variant themePalette: myApp.defaultThemePalette()
+
+    // set some constants(Material Design)
+    property color primaryColor: primaryPalette[1]
+    property color primaryDarkColor: primaryPalette[2]
+    property string iconOnPrimaryFolder: primaryPalette[7]
+
+    property color accentColor: accentPalette[0]
+    property color textOnPrimaryDark: primaryPalette[5]
+    property color textOnPrimaryLight: primaryPalette[3]
+    property color textOnPrimary: primaryPalette[4]
+    property color cardAndDialogBackground: themePalette[1]
+    property color dividerColor: themePalette[0]
+    property color popupTextColor: themePalette[10]
+    property string iconFolder: themePalette[7]
+    Material.primary: primaryColor
+    Material.accent: accentColor
+    property real primaryTextOpacity: themePalette[2]
+    property real dividerOpacity: themePalette[4]
+    property real iconActiveOpacity: themePalette[5]
+    property real iconInactiveOpacity: themePalette[6]
+
+    // font sizes - defaults from Google Material Design Guide
+    property int fontSizeSubheading: 16
+    property int fontSizeTitle: 20
+
+    property real opacitySubheading: primaryTextOpacity
+    property real opacityBodyAndButton: primaryTextOpacity
+    property real opacityTitle: primaryTextOpacity
+
+    property int homeNavigationIndex: 0
+    property int addWatchItemIndex: 1
+    property var navigationModel: [
+        {"name": "HomeRoute", "source": "../components/Page1.qml", "activationPolicy": 1, "canGoBack": false, "canCancel": false},
+        {"name": "CreateWatchRoute", "source": "../components/CreateWatch.qml", "activationPolicy": 3, "canGoBack":true, "canCancel": true},
+    ]
+
+    property bool initDone: true
+
+    property string currentTitle: navigationTitles[navigationIndex]
+    property var navigationTitles: [
+        qsTr("Train Watch"),
+        qsTr("Create Watch Item"),
+    ]
+
+    property int firstActiveDestination: homeNavigationIndex
+    property int navigationIndex: firstActiveDestination
+
+    // StackView
+    property var activationPolicy: {
+        "NONE":0, "IMMEDIATELY":1, "LAZY":2, "WHILE_CURRENT":3
+    }
+
+    onNavigationIndexChanged: {
+        rootView.activateDestination(navigationIndex)
+    }
 
     Material.theme: Material.Light
-    Material.accent: Material.Purple
-    Material.primary: Material.Purple
 
-    FileIO {
-        id: settings
-        source: AppDataDir.getPath(AppDataDir.AppDataLocation) + "test.json"
+    header: titleBar
+    Loader {
+        id: titleBar
+        visible: true
+        active: true
+        source: "routing/DrawerTitleBar.qml"
     }
 
-    header: ToolBar {
-        RowLayout {
-            spacing: 20
-            anchors.fill: parent
-
-            ToolButton {
-                id: contextButton
-                contentItem: Image {
-                    fillMode: Image.Pad
-                    horizontalAlignment: Image.AlignHCenter
-                    verticalAlignment: Image.AlignVCenter
-                    source: "qrc:/images/drawer.png"
-                }
-                onClicked: {
-                    createWatchFormLoader.item.saveWatchItem();
-                }
-            }
-
-            Label {
-                id: titleLabel
-                text: "Train Watch"
-                font.pixelSize: 20
-                elide: Label.ElideRight
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                Layout.fillWidth: true
-            }
-
-            ToolButton {
-                contentItem: Image {
-                    fillMode: Image.Pad
-                    horizontalAlignment: Image.AlignHCenter
-                    verticalAlignment: Image.AlignVCenter
-                    source: "qrc:/images/menu.png"
-                }
-                onClicked: optionsMenu.open()
-
-                Menu {
-                    id: optionsMenu
-                    x: parent.width - width
-                    transformOrigin: Menu.TopRight
-
-                    MenuItem {
-                        text: "Settings"
-                        onTriggered: settingsPopup.open()
-                    }
-                    MenuItem {
-                        text: "About"
-                        onTriggered: aboutDialog.open()
-                    }
-                }
-            }
-        }
-    }
-
-    SwipeView {
+    StackView {
         id: rootView
         anchors.fill: parent
-        currentIndex: tabBar.currentIndex
-        onCurrentIndexChanged: function() {
-            if(currentIndex === 0) {
-                contextButton.contentItem.source = "qrc:/images/drawer.png"
-            }
-            else {
-                contextButton.contentItem.source = "qrc:/images/arrow_back.png"
-                createWatchFormLoader.setSource("../components/CreateWatch.qml", { watchItem: dataManager.createWatchItem() })
-            }
 
-        }
-
-        TwComponents.Page1 {
-        }
-
-        Page {
-            Loader {
-                id: createWatchFormLoader
+        replaceEnter: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 300
             }
         }
-    }
-
-    footer: TabBar {
-        Material.foreground: white
-        id: tabBar
-        currentIndex: rootView.currentIndex
-        TabButton {
-            text: qsTr("Overview")
+        replaceExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 300
+            }
         }
-        TabButton {
-            text: qsTr("Add")
+
+        Repeater {
+            id: destinations
+            model: navigationModel
+            // Destination encapsulates Loader
+            // depends from activationPolicy how to load dynamically
+            Destination {
+                id: destinationLoader
+            }
+            // Repeater creates all destinations (Loader)
+            // all destinatation items with activationPolicy IMMEDIATELY are activated
+        }
+
+        function activateDestination(navigationIndex) {
+            if(destinations.itemAt(navigationIndex).status === Loader.Ready) {
+                replaceDestination(destinations.itemAt(navigationIndex))
+            } else {
+                destinations.itemAt(navigationIndex).active = true
+            }
+        }
+
+        // called from activeDestination() and also from Destination.onLoaded()
+        function replaceDestination(theItemLoader) {
+            var previousIndex = rootView.currentItem.myIndex
+            var previousItemLoader
+            if(previousIndex >= 0) {
+                previousItemLoader = destinations.itemAt(previousIndex)
+            }
+
+            // now replace the Page
+            rootView.replace(theItemLoader.item)
+            // check if previous should be unloaded
+
+            if(previousIndex >= 0) {
+                if(destinations.itemAt(previousIndex).pageActivationPolicy === activationPolicy.WHILE_CURRENT) {
+                    destinations.itemAt(previousIndex).active = false
+                }
+            }
         }
     }
 
     Component.onCompleted: {
         dataManager.initialize();
+        rootView.replace(destinations.itemAt(firstActiveDestination).item);
     }
 
     //ApplicationWindow functions

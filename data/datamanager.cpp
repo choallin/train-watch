@@ -136,6 +136,14 @@ WatchItem* DataManager::createWatchItem()
     return watchItem;
 }
 
+void DataManager::undoCreateWatchItem(WatchItem* watchItem)
+{
+    if(watchItem) {
+        watchItem->deleteLater();
+        watchItem = 0;
+    }
+}
+
 void DataManager::appendWatchItem(WatchItem* watchItem)
 {
     watchItem->setParent(this);

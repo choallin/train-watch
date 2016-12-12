@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 
 Pane {
     id: overview
+    property int myIndex: 0
 
     ColumnLayout {
         id: column
@@ -35,5 +36,9 @@ Pane {
 
             }
         }
+    }
+
+    function init() {
+
     }
 }

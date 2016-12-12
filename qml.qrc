@@ -9,7 +9,6 @@
         <file>components/AlarmClockForm.ui.qml</file>
         <file>components/Clock.qml</file>
         <file>components/CreateWatch.qml</file>
-        <file>components/CreateWatchForm.ui.qml</file>
         <file>components/TumblerTimeEdit.qml</file>
         <file>components/TumblerTimeEditForm.ui.qml</file>
         <file>popups/TimePicker.qml</file>
@@ -18,5 +17,12 @@
         <file>guiItems/IconActive.qml</file>
         <file>popups/PopupInfo.qml</file>
         <file>guiItems/LabelSubheading.qml</file>
+        <file>components/SuggestionList.qml</file>
+        <file>models/Stations.qml</file>
+        <file>guiItems/HorizontalListDivider.qml</file>
+        <file>guiItems/IconInactive.qml</file>
+        <file>guiItems/LabelTitle.qml</file>
+        <file>routing/DrawerTitleBar.qml</file>
+        <file>routing/Destination.qml</file>
     </qresource>
 </RCC>

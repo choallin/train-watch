@@ -13,8 +13,8 @@ Button {
     focusPolicy: Qt.NoFocus
     contentItem:
         IconActive {
-        id: theIcon
-    }
+            id: theIcon
+        }
     background:
         Rectangle {
         id: buttonBackground

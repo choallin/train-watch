@@ -45,7 +45,7 @@ public:
     inline void setLine(const QString& line) { m_line = line; }
 
     inline QTime pickUpTime() const { return m_pickUpTime; }
-    inline void setPickUpTime(const QTime& pickUpTime) { m_pickUpTime = pickUpTime; }
+    void setPickUpTime(const QTime& pickUpTime);
 
     inline int offset() const { return m_offset; }
     inline void setOffset(const int offset) { m_offset = offset; }
@@ -65,9 +65,9 @@ public:
 Q_SIGNALS:
     void titleChanged(QString);
     void countryChanged(QString);
-    void stationChanged(Station*);
+    void stationChanged();
     void lineChanged(QString);
-    void pickUpTimeChanged(QTime);
+    void pickUpTimeChanged();
     void offsetChanged(int);
     void activeChanged(bool);
 

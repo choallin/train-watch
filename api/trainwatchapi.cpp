@@ -26,15 +26,16 @@ void TrainWatchApi::getStations(const QString& searchString)
     QNetworkAccessManager* networkAccessManager = new QNetworkAccessManager(this);
     if(networkAccessManager->networkAccessible() != QNetworkAccessManager::Accessible) {
         if(networkAccessManager->networkAccessible() == QNetworkAccessManager::NotAccessible) {
-            qDebug() << "getStations: NO ACCESS TO NETWORK";
+            qWarning() << "getStations: NO ACCESS TO NETWORK";
             return;
         }
-        qDebug() << "getStations NO ACCESS: The network accessibility cannot be determined.";
+        qWarning() << "getStations NO ACCESS: The network accessibility cannot be determined.";
         return;
     }
 
     QString uri;
     uri = "http://www.mocky.io/v2/583c87d029000065106ecb12";
+    //uri = "http://192.168.43.187:2300/version/1/country/de/stations?starts_with=" + searchString;
 
     QNetworkRequest request(uri);
 
