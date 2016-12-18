@@ -1,11 +1,10 @@
-#ifndef STATION_H
-#define STATION_H
+#ifndef COUNTRY_H
+#define COUNTRY_H
 
-#include <QDebug>
 #include <QObject>
-#include <QTime>
+#include <QVariantMap>
 
-class Station: public QObject
+class Country: public QObject
 {
     Q_OBJECT
 
@@ -17,9 +16,9 @@ private:
     QString m_name;
 
 public:
-    Station(QObject *parent = 0);
-    Station(const QString& uuid, const QString& name, QObject *parent = 0);
-    ~Station();
+    Country(QObject *parent = 0);
+    Country(const QString& uuid, const QString& name, QObject *parent = 0);
+    ~Country();
 
     inline QString uuid() const { return m_uuid; }
     void setUuid(const QString& uuid);
@@ -38,8 +37,8 @@ Q_SIGNALS:
     void nameChanged(QString);
 
 public:
-    Q_DISABLE_COPY (Station)
+    Q_DISABLE_COPY (Country)
 };
-Q_DECLARE_METATYPE(Station*)
+Q_DECLARE_METATYPE(Country*)
 
-#endif // STATION_H
+#endif // COUNTRY_H

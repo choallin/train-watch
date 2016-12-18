@@ -1,15 +1,13 @@
-#include <QDebug>
+#include "country.h"
 
-#include "station.h"
-
-Station::Station(QObject* parent) :
+Country::Country(QObject* parent) :
     QObject(parent),
     m_uuid(QString()),
     m_name(QString())
 {
 }
 
-Station::Station(const QString& uuid, const QString& name, QObject *parent) :
+Country::Country(const QString& uuid, const QString& name, QObject *parent) :
     QObject(parent),
     m_uuid(uuid),
     m_name(name)
@@ -17,36 +15,36 @@ Station::Station(const QString& uuid, const QString& name, QObject *parent) :
 }
 
 
-Station::~Station()
+Country::~Country()
 {
 }
 
-QString Station::toS() const
+QString Country::toS() const
 {
-    return QString("Station(%1, %2)")
+    return QString("Country(%1, %2)")
             .arg(m_uuid)
             .arg(m_name);
 }
 
-void Station::setUuid(const QString &uuid)
+void Country::setUuid(const QString &uuid)
 {
     m_uuid = uuid;
     emit uuidChanged(m_uuid);
 }
 
-void Station::setName(const QString &name)
+void Country::setName(const QString &name)
 {
     m_name = name;
     emit nameChanged(m_name);
 }
 
-void Station::fillFromCacheMap(const QVariantMap& map)
+void Country::fillFromCacheMap(const QVariantMap& map)
 {
     m_uuid = map.value("uuid").toString();
     m_name = map.value("name").toString();
 }
 
-QVariantMap Station::toCacheMap() const
+QVariantMap Country::toCacheMap() const
 {
     QVariantMap map;
     map.insert("uuid", uuid());
