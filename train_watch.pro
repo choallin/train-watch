@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     lib/jsonapi/manager.cpp \
     lib/jsonapi/deserializer/deserializer.cpp \
     lib/jsonapi/deserializer/stationsdeserializer.cpp \
-    dataClasses/country.cpp
+    dataClasses/country.cpp \
+    lib/jsonapi/deserializer/countriesdeserializer.cpp
 
 OTHER_FILES += \
     main.qml \
@@ -50,4 +51,5 @@ HEADERS += \
     lib/jsonapi/manager.h \
     lib/jsonapi/deserializer/deserializer.h \
     lib/jsonapi/deserializer/stationsdeserializer.h \
-    dataClasses/country.h
+    dataClasses/country.h \
+    lib/jsonapi/deserializer/countriesdeserializer.h

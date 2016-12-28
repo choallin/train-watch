@@ -6,13 +6,14 @@
 #include <QTime>
 
 #include "station.h"
+#include "country.h"
 
 class WatchItem: public QObject
 {
     Q_OBJECT
 
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged FINAL)
-    Q_PROPERTY(QString country READ country WRITE setCountry NOTIFY countryChanged FINAL)
+    Q_PROPERTY(Country* country READ country WRITE setCountry NOTIFY countryChanged FINAL)
     Q_PROPERTY(Station* station READ station WRITE setStation NOTIFY stationChanged FINAL)
     Q_PROPERTY(QString line READ line WRITE setLine NOTIFY lineChanged FINAL)
     Q_PROPERTY(QTime pickUpTime READ pickUpTime WRITE setPickUpTime NOTIFY pickUpTimeChanged FINAL)
@@ -21,7 +22,7 @@ class WatchItem: public QObject
 
 private:
     QString m_title;
-    QString m_country;
+    Country* m_country;
     Station* m_station;
     QString m_line;
     QTime m_pickUpTime;
@@ -35,8 +36,8 @@ public:
     inline QString title() const { return m_title; }
     inline void setTitle(const QString& title) { m_title = title; }
 
-    inline QString country() const { return m_country; }
-    inline void setCountry(const QString& country) { m_country = country; }
+    inline Country* country() const { return m_country; }
+    void setCountry(Country* country);
 
     inline Station* station() const { return m_station; }
     void setStation(Station* station);
@@ -64,7 +65,7 @@ public:
 
 Q_SIGNALS:
     void titleChanged(QString);
-    void countryChanged(QString);
+    void countryChanged();
     void stationChanged();
     void lineChanged(QString);
     void pickUpTimeChanged();

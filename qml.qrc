@@ -24,5 +24,6 @@
         <file>guiItems/LabelTitle.qml</file>
         <file>routing/DrawerTitleBar.qml</file>
         <file>routing/Destination.qml</file>
+        <file>components/ItemList.qml</file>
     </qresource>
 </RCC>

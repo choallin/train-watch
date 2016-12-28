@@ -5,7 +5,7 @@
 WatchItem::WatchItem(QObject* parent) :
     QObject(parent),
     m_title(QString()),
-    m_country(QString()),
+    m_country(new Country()),
     m_station(new Station("1", "Station1")),
     m_line(QString()),
     m_pickUpTime(QTime(10,0,0)),
@@ -23,12 +23,22 @@ QString WatchItem::toS() const
 {
     return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7)")
             .arg(m_title)
-            .arg(m_country)
+            .arg(m_country ? m_country->toS() : "NULL")
             .arg(m_station ? m_station->toS() : "NULL")
             .arg(m_line)
             .arg(m_pickUpTime.toString("hh:mm:ss"))
             .arg(m_offset)
             .arg(m_active);
+}
+
+void WatchItem::setCountry(Country *country)
+{
+    if(m_country){
+        delete m_country;
+    }
+    country->setParent(this);
+    m_country= country;
+    emit countryChanged();
 }
 
 void WatchItem::setStation(Station *station)
@@ -39,7 +49,6 @@ void WatchItem::setStation(Station *station)
     station->setParent(this);
     m_station = station;
     emit stationChanged();
-
 }
 
 void WatchItem::setPickUpTime(const QTime &pickUpTime)
@@ -51,7 +60,7 @@ void WatchItem::setPickUpTime(const QTime &pickUpTime)
 bool WatchItem::isValid() const
 {
     return !m_title.isEmpty() &&
-           !m_country.isEmpty() &&
+           !m_country->uuid().isEmpty() &&
            !m_station->uuid().isEmpty() &&
            !m_line.isEmpty() &&
            m_pickUpTime.isValid() &&
@@ -61,7 +70,9 @@ bool WatchItem::isValid() const
 void WatchItem::fillFromCacheMap(const QVariantMap& map)
 {
     m_title = map.value("title").toString();
-    m_country = map.value("country").toString();
+    Country* country = new Country(this);
+    country->fillFromCacheMap(map.value("country").toMap());
+    setCountry(country);
     Station* station = new Station(this);
     station->fillFromCacheMap(map.value("station").toMap());
     setStation(station);
@@ -75,7 +86,7 @@ QVariantMap WatchItem::toCacheMap() const
 {
     QVariantMap map;
     map.insert("title", title());
-    map.insert("country", country());
+    map.insert("country", country()->toCacheMap());
     map.insert("station", station()->toCacheMap());
     map.insert("line", line());
     map.insert("pickUpTime", pickUpTime());

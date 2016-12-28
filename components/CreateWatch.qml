@@ -41,6 +41,25 @@ StackView {
     }
 
     Component {
+        id: countriesListComponent
+        ItemList {
+            id: countriesList
+
+            onItemSelected: function(data) {
+                createWatchStack.pop();
+                watchItem.country = data;
+            }
+
+            Connections {
+                target: trainWatchApi
+                onCountriesFinished: {
+                    countriesList.setModel(countries);
+                }
+            }
+        }
+    }
+
+    Component {
         id: formComponent
         Item {
             id: form
@@ -58,7 +77,7 @@ StackView {
 
                 TextField {
                     id: txtTitle
-                    placeholderText: qsTr("Titles")
+                    placeholderText: qsTr("Title")
                     Layout.fillWidth: true
                     text: watchItem ? watchItem.title : ''
                 }
@@ -77,7 +96,13 @@ StackView {
                     placeholderText: qsTr("Country")
                     Layout.fillWidth: true
                     Layout.fillHeight: false
-                    text: watchItem ? watchItem.country : ''
+                    text: watchItem ? watchItem.country.name : ''
+                    onActiveFocusChanged: function(active) {
+                        if(active) {
+                            trainWatchApi.getCountries();
+                            createWatchStack.push(countriesListComponent);
+                        }
+                    }
                 }
 
                 TextField {
@@ -139,7 +164,6 @@ StackView {
                         value: watchItem ? watchItem.offset : 0
                         editable: false
                     }
-
                 }
             }
 
@@ -195,10 +219,6 @@ StackView {
             Connections {
                 target: timePickerLoader.item
                 onClosed: timePickerClosed()
-            }
-
-            function stationSelected() {
-                createWatchStack.pop(suggestionListComponent);
             }
 
             function timePickerClosed() {

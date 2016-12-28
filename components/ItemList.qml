@@ -1,15 +1,13 @@
-import QtQuick 2.6
-import QtQuick.Layouts 1.3
+import QtQuick 2.0
 import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
-import QtGraphicalEffects 1.0
-import org.trainwatch.data 1.0
+import QtQuick.Layouts 1.3
 import "../guiItems"
 
+
 Page {
-    id: suggestionList
+    id: itemList
     focus: true
-    property string name: "SuggestionList"
+    property string name: "ItemList"
 
     bottomPadding: 6
     topPadding: 6
@@ -19,9 +17,9 @@ Page {
 
     // list row delegate
     Component {
-        id: suggestionRowComponent
+        id: itemListRowComponent
         ColumnLayout {
-            id: suggenstionRow
+            id: itemRow
             implicitWidth: appWindow.width
             RowLayout {
                 spacing: 20
@@ -29,7 +27,7 @@ Page {
                 Layout.rightMargin: 6
                 Layout.topMargin: 6
                 IconInactive {
-                    imageName: "subway.png"
+                    imageName: "flag.png"
                     fillMode: Image.Pad
                 }
                 ColumnLayout {
@@ -52,7 +50,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        suggestionList.itemSelected(model.modelData);
+                        itemList.itemSelected(model.modelData);
                     }
                 }
             }
@@ -68,40 +66,22 @@ Page {
         height: parent.height
         focus: true
 
-        TextField {
-            id: txtSearch
-            focus: true
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            placeholderText: qsTr("Station")
-
-            onTextChanged: function() {
-                suggestionList.search(this.text);
-            }
-        }
-
         ListView {
             id: listView
             clip: true
             focus: true
-            anchors.left: txtSearch.left
-            anchors.right: txtSearch.right
-            anchors.top: txtSearch.bottom
+            anchors.fill: parent
             height: parent.height
 
             currentIndex: -1
 
-            delegate: suggestionRowComponent
+            delegate: itemListRowComponent
 
             ScrollIndicator.vertical: ScrollIndicator { }
         }
     }
 
-    function addItems(items) {
-        listView.model = items;
+    function setModel(model) {
+        listView.model = model;
     }
-
 }
