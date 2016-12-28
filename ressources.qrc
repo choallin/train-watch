@@ -40,5 +40,18 @@
         <file>images/white/clear@2x.png</file>
         <file>images/white/clear@3x.png</file>
         <file>images/white/clear@4x.png</file>
+        <file>images/white/subway.png</file>
+        <file>images/white/subway@2x.png</file>
+        <file>images/white/subway@3x.png</file>
+        <file>images/white/subway@4x.png</file>
+        <file>images/black/download@2x.png</file>
+        <file>images/black/flag.png</file>
+        <file>images/black/flag@2x.png</file>
+        <file>images/black/flag@3x.png</file>
+        <file>images/black/flag@4x.png</file>
+        <file>images/white/flag.png</file>
+        <file>images/white/flag@2x.png</file>
+        <file>images/white/flag@3x.png</file>
+        <file>images/white/flag@4x.png</file>
     </qresource>
 </RCC>
