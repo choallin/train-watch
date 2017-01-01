@@ -25,5 +25,7 @@
         <file>routing/DrawerTitleBar.qml</file>
         <file>routing/Destination.qml</file>
         <file>components/ItemList.qml</file>
+        <file>guiItems/WeekdayToggle.qml</file>
+        <file>guiItems/WeekdayButton.qml</file>
     </qresource>
 </RCC>
