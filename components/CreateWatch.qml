@@ -165,6 +165,12 @@ StackView {
                         editable: false
                     }
                 }
+
+                WeekdayToggle {
+                    id: weekdayToggle
+                    weekDayArray: watchItem ? watchItem.weekDays : 0
+                    Layout.fillWidth: true
+                }
             }
 
             Binding {
@@ -202,6 +208,11 @@ StackView {
                 property: "offset"
                 value: spOffset.value
             }
+            Binding {
+                target: watchItem
+                property: "weekDays"
+                value: weekdayToggle.weekDayArray
+            }
 
             Loader {
                 id: timePickerLoader
@@ -231,7 +242,8 @@ StackView {
                 if(timePickerLoader.active) {
                     timePickerLoader.item.open();
                     timePickerLoader.item.onHoursButtonClicked();
-                } else {
+                }
+                else {
                     timePickerLoader.active = true;
                 }
             }

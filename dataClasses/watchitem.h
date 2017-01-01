@@ -17,6 +17,7 @@ class WatchItem: public QObject
     Q_PROPERTY(Station* station READ station WRITE setStation NOTIFY stationChanged FINAL)
     Q_PROPERTY(QString line READ line WRITE setLine NOTIFY lineChanged FINAL)
     Q_PROPERTY(QTime pickUpTime READ pickUpTime WRITE setPickUpTime NOTIFY pickUpTimeChanged FINAL)
+    Q_PROPERTY(QStringList weekDays READ weekDays WRITE setWeekDays NOTIFY weekDaysChanged FINAL)
     Q_PROPERTY(int offset READ offset WRITE setOffset NOTIFY offsetChanged FINAL)
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
@@ -26,6 +27,7 @@ private:
     Station* m_station;
     QString m_line;
     QTime m_pickUpTime;
+    QStringList m_weekDays;
     int m_offset;
     bool m_active;
 
@@ -34,7 +36,7 @@ public:
     ~WatchItem();
 
     inline QString title() const { return m_title; }
-    inline void setTitle(const QString& title) { m_title = title; }
+    void setTitle(const QString& title);
 
     inline Country* country() const { return m_country; }
     void setCountry(Country* country);
@@ -47,6 +49,9 @@ public:
 
     inline QTime pickUpTime() const { return m_pickUpTime; }
     void setPickUpTime(const QTime& pickUpTime);
+
+    inline QStringList weekDays() const { return m_weekDays; }
+    void setWeekDays(const QStringList& weekDays);
 
     inline int offset() const { return m_offset; }
     inline void setOffset(const int offset) { m_offset = offset; }
@@ -64,11 +69,12 @@ public:
     bool isValid() const;
 
 Q_SIGNALS:
-    void titleChanged(QString);
+    void titleChanged();
     void countryChanged();
     void stationChanged();
     void lineChanged(QString);
     void pickUpTimeChanged();
+    void weekDaysChanged();
     void offsetChanged(int);
     void activeChanged(bool);
 
