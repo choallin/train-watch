@@ -5,6 +5,8 @@
 #include <QJsonArray>
 #include <QNetworkReply>
 
+#include "dataClasses/watchitem.h"
+
 class TrainWatchApi: public QObject
 {
     Q_OBJECT
@@ -21,6 +23,8 @@ public:
     void getCountries();
     Q_INVOKABLE
     void getStations(const QString& searchString);
+    Q_INVOKABLE
+    void getSchedules(WatchItem* watchItem);
 
 private:
     QString api();
@@ -30,10 +34,12 @@ private:
 signals:
     void stationsFinished(QVariant stations);
     void countriesFinished(QVariant countries);
+    void schedulesFinished(QVariant schedules);
 
 private slots:
     void stationSearchRequestFinished(QNetworkReply* reply);
     void countriesSearchRequestFinished(QNetworkReply* reply);
+    void schedulesSearchRequestFinished(QNetworkReply* reply);
 };
 
 #endif // TRAINWATCHAPI_H

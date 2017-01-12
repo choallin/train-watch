@@ -6,6 +6,7 @@
 //deserializers
 #include "deserializer/stationsdeserializer.h"
 #include "deserializer/countriesdeserializer.h"
+#include "deserializer/schedulesdeserializer.h"
 
 using namespace JSONAPI;
 
@@ -16,6 +17,7 @@ Manager::Manager(QObject *parent) :
 {
     registerDeserializer("station", new StationsDeserializer());
     registerDeserializer("countries", new CountriesDeserializer());
+    registerDeserializer("schedules", new SchedulesDeserializer());
 }
 
 Manager::~Manager()

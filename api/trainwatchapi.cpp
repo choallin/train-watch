@@ -9,6 +9,7 @@
 #include "lib/jsonapi/manager.h"
 #include "../dataClasses/station.h"
 #include "../dataClasses/country.h"
+#include "../dataClasses/schedule.h"
 
 TrainWatchApi::TrainWatchApi(QObject* parent):
     QObject(parent),
@@ -148,6 +149,48 @@ void TrainWatchApi::countriesSearchRequestFinished(QNetworkReply* reply)
     }
 
     emit countriesFinished(QVariant::fromValue(countries));
+
+    reply->deleteLater();
+    networkAccessManager->deleteLater();
+}
+
+void TrainWatchApi::getSchedules(WatchItem* watchItem)
+{
+    QNetworkAccessManager* networkAccessManager = getNetworkAccessManager();
+    if(!networkAccessManager){
+        return;
+    }
+
+    QString uri;
+    uri = "http://www.mocky.io/v2/5877c8b20f0000610c0d4902";
+    //uri = api() + "country/" + watchItem->country()->uuid() + "/schedule/stations/" + watchItem->station()->uuid() + "?departure_time=" + watchItem->pickUpTime().toString("hh:mm");
+
+    QNetworkRequest request(uri);
+
+    networkAccessManager->get(request);
+    connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(schedulesSearchRequestFinished(QNetworkReply*)));
+}
+
+void TrainWatchApi::schedulesSearchRequestFinished(QNetworkReply* reply)
+{
+    QNetworkAccessManager* networkAccessManager = qobject_cast<QNetworkAccessManager*>(sender());
+
+    if(!isSuccessFull(reply)){
+       return;
+    }
+
+    QJsonDocument jdoc = QJsonDocument::fromJson(reply->readAll());
+
+    JSONAPI::Manager& jsonApiManager = JSONAPI::Manager::instance();
+    QList<QObject*> schedules = jsonApiManager.deserialize(jdoc.object());
+
+    QListIterator<QObject*> lit(schedules);
+    while(lit.hasNext()){
+        Schedule* schedule = dynamic_cast<Schedule*>(lit.next());
+        QQmlEngine::setObjectOwnership(schedule, QQmlEngine::JavaScriptOwnership);
+    }
+
+    emit schedulesFinished(QVariant::fromValue(schedules));
 
     reply->deleteLater();
     networkAccessManager->deleteLater();

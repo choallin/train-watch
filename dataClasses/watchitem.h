@@ -7,6 +7,7 @@
 
 #include "station.h"
 #include "country.h"
+#include "schedule.h"
 
 class WatchItem: public QObject
 {
@@ -15,7 +16,7 @@ class WatchItem: public QObject
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged FINAL)
     Q_PROPERTY(Country* country READ country WRITE setCountry NOTIFY countryChanged FINAL)
     Q_PROPERTY(Station* station READ station WRITE setStation NOTIFY stationChanged FINAL)
-    Q_PROPERTY(QString line READ line WRITE setLine NOTIFY lineChanged FINAL)
+    Q_PROPERTY(Schedule* schedule READ schedule WRITE setSchedule NOTIFY scheduleChanged FINAL)
     Q_PROPERTY(QTime pickUpTime READ pickUpTime WRITE setPickUpTime NOTIFY pickUpTimeChanged FINAL)
     Q_PROPERTY(QStringList weekDays READ weekDays WRITE setWeekDays NOTIFY weekDaysChanged FINAL)
     Q_PROPERTY(int offset READ offset WRITE setOffset NOTIFY offsetChanged FINAL)
@@ -25,7 +26,7 @@ private:
     QString m_title;
     Country* m_country;
     Station* m_station;
-    QString m_line;
+    Schedule* m_schedule;
     QTime m_pickUpTime;
     QStringList m_weekDays;
     int m_offset;
@@ -44,8 +45,8 @@ public:
     inline Station* station() const { return m_station; }
     void setStation(Station* station);
 
-    inline QString line() const { return m_line; }
-    inline void setLine(const QString& line) { m_line = line; }
+    inline Schedule* schedule() const { return m_schedule; }
+    void setSchedule(Schedule* schedule);
 
     inline QTime pickUpTime() const { return m_pickUpTime; }
     void setPickUpTime(const QTime& pickUpTime);
@@ -72,7 +73,7 @@ Q_SIGNALS:
     void titleChanged();
     void countryChanged();
     void stationChanged();
-    void lineChanged(QString);
+    void scheduleChanged();
     void pickUpTimeChanged();
     void weekDaysChanged();
     void offsetChanged(int);

@@ -7,7 +7,7 @@ WatchItem::WatchItem(QObject* parent) :
     m_title(QString()),
     m_country(new Country()),
     m_station(new Station("1", "Station1")),
-    m_line(QString()),
+    m_schedule(new Schedule()),
     m_pickUpTime(QTime(10,0,0)),
     m_weekDays(QStringList{"1","2","3"}),
     m_offset(20),
@@ -22,11 +22,11 @@ WatchItem::~WatchItem()
 
 QString WatchItem::toS() const
 {
-    return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7, %8)")
+    return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7, %8, %9)")
             .arg(m_title)
             .arg(m_country ? m_country->toS() : "NULL")
             .arg(m_station ? m_station->toS() : "NULL")
-            .arg(m_line)
+            .arg(m_schedule ? m_schedule->toS() : "NULL")
             .arg(m_pickUpTime.toString("hh:mm:ss"))
             .arg(m_weekDays.join("-"))
             .arg(m_offset)
@@ -61,6 +61,16 @@ void WatchItem::setStation(Station *station)
     emit stationChanged();
 }
 
+void WatchItem::setSchedule(Schedule *schedule)
+{
+    if(m_schedule){
+        delete m_schedule;
+    }
+    schedule->setParent(this);
+    m_schedule = schedule;
+    emit scheduleChanged();
+}
+
 void WatchItem::setPickUpTime(const QTime &pickUpTime)
 {
     m_pickUpTime = pickUpTime;
@@ -69,6 +79,8 @@ void WatchItem::setPickUpTime(const QTime &pickUpTime)
 
 void WatchItem::setWeekDays(const QStringList &weekDays)
 {
+    qDebug() << "setWeekDays" << weekDays;
+    qDebug() << m_weekDays;
     if(m_weekDays != weekDays){
         m_weekDays = weekDays;
         emit weekDaysChanged();
@@ -80,7 +92,7 @@ bool WatchItem::isValid() const
     return !m_title.isEmpty() &&
            !m_country->uuid().isEmpty() &&
            !m_station->uuid().isEmpty() &&
-           !m_line.isEmpty() &&
+           !m_schedule->id().isEmpty() &&
            m_pickUpTime.isValid() &&
            m_offset >= 0;
 }
@@ -94,7 +106,8 @@ void WatchItem::fillFromCacheMap(const QVariantMap& map)
     Station* station = new Station(this);
     station->fillFromCacheMap(map.value("station").toMap());
     setStation(station);
-    m_line = map.value("line").toString();
+    Schedule* schedule = new Schedule(this);
+    schedule->fillFromCacheMap(map.value("schedule").toMap());
     m_pickUpTime = map.value("pickUpTime").toTime();
     m_weekDays = map.value("weekDays").toStringList();
     m_offset = map.value("offset").toInt();
@@ -107,7 +120,7 @@ QVariantMap WatchItem::toCacheMap() const
     map.insert("title", title());
     map.insert("country", country()->toCacheMap());
     map.insert("station", station()->toCacheMap());
-    map.insert("line", line());
+    map.insert("schedule", schedule()->toCacheMap());
     map.insert("pickUpTime", pickUpTime());
     map.insert("weekDays", weekDays());
     map.insert("offset", offset());
