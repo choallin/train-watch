@@ -7,6 +7,7 @@ import QtQuick.Window 2.0
 import org.trainwatch.data 1.0
 import QtQml 2.2
 import "../guiItems"
+import "../guiDelegates"
 
 StackView {
     id: createWatchStack
@@ -44,16 +45,41 @@ StackView {
         id: countriesListComponent
         ItemList {
             id: countriesList
+            listItemDelegate: CountryRowDelegate {
+                id: countryRowDelegate
 
-            onItemSelected: function(data) {
-                createWatchStack.pop();
-                watchItem.country = data;
+                onItemClicked: function(data) {
+                    createWatchStack.pop();
+                    watchItem.country = data;
+                }
             }
 
             Connections {
                 target: trainWatchApi
                 onCountriesFinished: {
                     countriesList.setModel(countries);
+                }
+            }
+        }
+    }
+
+    Component {
+        id: schedulesListComponent
+        ItemList {
+            id: schedulesList
+            listItemDelegate: ScheduleRowDelegate {
+                id: scheduleRowDelegate
+
+                onItemClicked: function(data) {
+                    createWatchStack.pop();
+                    watchItem.schedule = data;
+                }
+            }
+
+            Connections {
+                target: trainWatchApi
+                onSchedulesFinished: {
+                    schedulesList.setModel(schedules);
                 }
             }
         }
@@ -142,7 +168,13 @@ StackView {
                     id: txtLine
                     placeholderText: qsTr("Line")
                     Layout.fillWidth: true
-                    text: watchItem ? watchItem.line : ''
+                    text: watchItem ? watchItem.schedule.line + " " + Qt.formatDateTime(watchItem.schedule.departure, "hh:mm") : ''
+                    onActiveFocusChanged: function(active) {
+                        if(active) {
+                            trainWatchApi.getSchedules(watchItem);
+                            createWatchStack.push(schedulesListComponent);
+                        }
+                    }
                 }
 
                 RowLayout {
@@ -200,7 +232,7 @@ StackView {
             }
             Binding {
                 target: watchItem
-                property: "line"
+                property: "schedule.id"
                 value: txtLine.text
             }
             Binding {

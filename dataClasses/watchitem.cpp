@@ -11,7 +11,7 @@ WatchItem::WatchItem(QObject* parent) :
     m_pickUpTime(QTime(10,0,0)),
     m_weekDays(QStringList{"1","2","3"}),
     m_offset(20),
-    m_active(false)
+    m_active(true)
 {
 }
 

@@ -8,11 +8,11 @@ Page {
     id: itemList
     focus: true
     property string name: "ItemList"
+    property alias listItemDelegate : listView.delegate
 
     bottomPadding: 6
     topPadding: 6
 
-    signal search(string searchStrng)
     signal itemSelected(var data)
 
     // list row delegate
@@ -74,8 +74,6 @@ Page {
             height: parent.height
 
             currentIndex: -1
-
-            delegate: itemListRowComponent
 
             ScrollIndicator.vertical: ScrollIndicator { }
         }
