@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import QtQuick.Controls.Material 2.0
 
 // Weekday Button
 Button {
@@ -9,12 +10,21 @@ Button {
     autoRepeat: false
     checkable: true
     flat: true
+    contentItem: Text {
+        id: buttonText
+        text: weekdayButton.text
+        color: weekdayButton.checked ? textOnPrimary : primaryDarkColor
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        elide: Text.ElideRight
+    }
     background: Rectangle {
-        implicitWidth: 32
-        implicitHeight: 32
-        radius: implicitWidth / 2
-        border.color: weekdayButton.checked ? "black" : "white"
-        border.width: 1
+        implicitHeight: 40
+        implicitWidth: 40
+        radius: width/2
+        border.color: Material.background
+        color: weekdayButton.checked ? primaryColor : Material.background
+        border.width: 0
         antialiasing: true
     }
 } // Weekday Button

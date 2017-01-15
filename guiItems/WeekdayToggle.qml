@@ -14,15 +14,17 @@ Item {
                 onClicked: toggle()
 
                 function toggle() {
+                    var tmpWeekDayArray = deepCopy(weekDayArray);
                     if(btnWeekDay.checked) {
                         modelData.checked = false;
-                        weekDayArray.push(modelData.idx);
+                        tmpWeekDayArray.push(modelData.idx);
                     }
                     else {
                         modelData.checked = true;
-                        var index = weekDayArray.indexOf(modelData.idx);
-                        weekDayArray.splice(index, 1);
+                        var index = tmpWeekDayArray.indexOf(modelData.idx);
+                        tmpWeekDayArray.splice(index, 1);
                     }
+                    weekDayArray = tmpWeekDayArray.sort();
                 }
             }
         }
@@ -42,5 +44,13 @@ Item {
             weekDays[weekDay].checked = true;
         }, this);
         return weekDays;
+    }
+
+    function deepCopy(p) {
+        var c = [];
+        for(var i in p) {
+            c[i] = p[i];
+        }
+        return c;
     }
 }

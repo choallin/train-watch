@@ -79,8 +79,6 @@ void WatchItem::setPickUpTime(const QTime &pickUpTime)
 
 void WatchItem::setWeekDays(const QStringList &weekDays)
 {
-    qDebug() << "setWeekDays" << weekDays;
-    qDebug() << m_weekDays;
     if(m_weekDays != weekDays){
         m_weekDays = weekDays;
         emit weekDaysChanged();
