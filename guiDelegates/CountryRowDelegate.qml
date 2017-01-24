@@ -23,14 +23,14 @@ ColumnLayout {
             spacing: 0
             LabelSubheading {
                 rightPadding: 12
-                text: model.modelData.id
+                text: model.modelData.uuid
                 font.bold: true
                 wrapMode: Label.WordWrap
             }
 
             Label {
                 rightPadding: 12
-                text: model.modelData.direction
+                text: model.modelData.name
                 Layout.fillWidth: true
                 opacity: opacityBodyAndButton
             }
