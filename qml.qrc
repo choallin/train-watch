@@ -29,5 +29,7 @@
         <file>guiItems/WeekdayButton.qml</file>
         <file>guiDelegates/ScheduleRowDelegate.qml</file>
         <file>guiDelegates/CountryRowDelegate.qml</file>
+        <file>components/Home.qml</file>
+        <file>guiItems/WeekdayPresentation.qml</file>
     </qresource>
 </RCC>
