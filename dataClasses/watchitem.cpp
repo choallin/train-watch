@@ -106,6 +106,7 @@ void WatchItem::fillFromCacheMap(const QVariantMap& map)
     setStation(station);
     Schedule* schedule = new Schedule(this);
     schedule->fillFromCacheMap(map.value("schedule").toMap());
+    setSchedule(schedule);
     m_pickUpTime = map.value("pickUpTime").toTime();
     m_weekDays = map.value("weekDays").toStringList();
     m_offset = map.value("offset").toInt();

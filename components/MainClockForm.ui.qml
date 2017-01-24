@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 
 Item {
     id: root
+    height: 200
 
     property alias trains: nextTrain.model
 

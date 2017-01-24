@@ -44,6 +44,7 @@ ApplicationWindow {
     // font sizes - defaults from Google Material Design Guide
     property int fontSizeSubheading: 16
     property int fontSizeTitle: 20
+    property int fontSizeSuperTitle: 30
 
     property real opacitySubheading: primaryTextOpacity
     property real opacityBodyAndButton: primaryTextOpacity
@@ -52,7 +53,7 @@ ApplicationWindow {
     property int homeNavigationIndex: 0
     property int addWatchItemIndex: 1
     property var navigationModel: [
-        {"name": "HomeRoute", "source": "../components/Page1.qml", "activationPolicy": 1, "canGoBack": false, "canCancel": false},
+        {"name": "HomeRoute", "source": "../components/Home.qml", "activationPolicy": 1, "canGoBack": false, "canCancel": false},
         {"name": "CreateWatchRoute", "source": "../components/CreateWatch.qml", "activationPolicy": 3, "canGoBack":true, "canCancel": true},
     ]
 
@@ -149,6 +150,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         dataManager.initialize();
+        destinations.itemAt(firstActiveDestination).item.init();
         rootView.replace(destinations.itemAt(firstActiveDestination).item);
     }
 
