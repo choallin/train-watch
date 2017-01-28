@@ -44,33 +44,33 @@ Item {
                             Layout.fillWidth: true
                             LabelSubheading {
                                 rightPadding: 12
-                                text: model.modelData.title
+                                text: title
                                 font.bold: true
                                 wrapMode: Label.WordWrap
                             } // label
 
                             Switch {
-                                checked: model.modelData.active
+                                checked: active
                             }
                         }
 
                         Label {
                             rightPadding: 12
-                            text: "<b>Station:</b>&ensp; " + model.modelData.station.name
+                            text: "<b>Station:</b>&ensp; " + station
                             Layout.fillWidth: true
                             opacity: opacityBodyAndButton
                         }
 
                         Label {
                             rightPadding: 12
-                            text: "<b>Line:</b>&ensp;&ensp; " + model.modelData.schedule.line
+                            text: "<b>Line:</b>&ensp;&ensp; " + line
                             Layout.fillWidth: true
                             opacity: opacityBodyAndButton
                         }
 
                         Label {
                             rightPadding: 12
-                            text: Qt.formatDateTime(model.modelData.schedule.departure, "hh:mm")
+                            text: Qt.formatDateTime(departure, "hh:mm")
                             Layout.fillWidth: true
                             font.pixelSize: fontSizeSuperTitle
                             opacity: opacitySubheading
@@ -114,6 +114,7 @@ Item {
 
     // called immediately after Loader.loaded
     function init() {
-        watchItemView.model = dataManager.watchItemPropertyList;
+        watchItemView.model = 0;
+        watchItemView.model = dataManager.watchItemsModel;
     }
 }
