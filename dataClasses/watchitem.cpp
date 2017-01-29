@@ -22,7 +22,7 @@ WatchItem::~WatchItem()
 
 QString WatchItem::toS() const
 {
-    return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7, %8, %9)")
+    return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7, %8)")
             .arg(m_title)
             .arg(m_country ? m_country->toS() : "NULL")
             .arg(m_station ? m_station->toS() : "NULL")
@@ -125,4 +125,9 @@ QVariantMap WatchItem::toCacheMap() const
     map.insert("offset", offset());
     map.insert("active", active());
     return map;
+}
+
+bool WatchItem::watchItemLessThan(QObject* v1, QObject* v2)
+{
+    return static_cast<WatchItem*>(v1)->title() < static_cast<WatchItem*>(v2)->title();
 }

@@ -27,9 +27,11 @@ public:
     ~WatchItemsModel();
 
     void setWatchItems(QList<WatchItem*>* watchItems);
+    inline QList<WatchItem*>* watchItems() { return m_watchItems; }
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
+    void appendWatchItem(WatchItem* watchItem);
 };
 
 #endif // WATCHITEMSMODEL_H

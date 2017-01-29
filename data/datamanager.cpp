@@ -9,6 +9,7 @@ DataManager::DataManager(QObject* parent):
 {
     m_dataRoot = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0);
     m_dataPath = m_dataRoot+"/data/";
+    m_watchItemsModel = new WatchItemsModel(this);
 
     if(!createPathsIfNotExists()){
         qFatal("FATAL error at DataManger init! App is not able to create data-paths ('%s', '%s')", qPrintable(m_dataRoot), qPrintable(m_dataPath));
@@ -54,6 +55,7 @@ QString DataManager::dataPath(const QString& filename)
 void DataManager::initialize()
 {
     initializeWatchItemsFromCache();
+    m_watchItemsModel->setWatchItems(m_watchItemList);
 }
 
 QVariantList DataManager::readfromCache(const QString& filename)
@@ -101,10 +103,11 @@ void DataManager::writeToCache(const QString& filename, QVariantList& data)
 void DataManager::saveWatchItemsToCache()
 {
     QVariantList cacheList;
-    qDebug("now saving %s WatchItems", qPrintable(QString::number(m_watchItems.size())));
-    QListIterator<QObject*> lit(m_watchItems);
+    QList<WatchItem*>* watchItems = m_watchItemsModel->watchItems();
+    qDebug("now saving %s WatchItems", qPrintable(QString::number(watchItems->size())));
+    QListIterator<WatchItem*> lit(*watchItems);
     while(lit.hasNext()){
-        const WatchItem* watchItem = static_cast<WatchItem*>(lit.next());
+        const WatchItem* watchItem = lit.next();
         QVariantMap cacheMap;
         cacheMap = watchItem->toCacheMap();
         cacheList.append(cacheMap);
@@ -114,7 +117,7 @@ void DataManager::saveWatchItemsToCache()
 
 void DataManager::initializeWatchItemsFromCache()
 {
-    m_watchItems.clear();
+    m_watchItemList = new QList<WatchItem*>();
     QVariantList cacheList = readfromCache("watchItems");
 
     QListIterator<QVariant> lit(cacheList);
@@ -124,10 +127,10 @@ void DataManager::initializeWatchItemsFromCache()
         // Important: DataManager must be parent of all root DTOs
         watchItem->setParent(this);
         watchItem->fillFromCacheMap(cacheMap);
-        m_watchItems.append(watchItem);
+        m_watchItemList->append(watchItem);
     }
 
-    qDebug("%s watchItems created", qPrintable(QString::number(m_watchItems.size())));
+    qDebug("%s watchItems created", qPrintable(QString::number(m_watchItemList->size())));
 }
 
 WatchItem* DataManager::createWatchItem()
@@ -147,70 +150,7 @@ void DataManager::undoCreateWatchItem(WatchItem* watchItem)
 void DataManager::appendWatchItem(WatchItem* watchItem)
 {
     watchItem->setParent(this);
-    m_watchItems.append(watchItem);
+    m_watchItemsModel->appendWatchItem(watchItem);
     saveWatchItemsToCache();
     emit addedToWatchItems(watchItem);
-    emit watchItemPropertyListChanged();
-}
-
-QQmlListProperty<WatchItem> DataManager::watchItemPropertyList()
-{
-    return QQmlListProperty<WatchItem>(this, 0,&DataManager::appendToWatchItemProperty, &DataManager::watchItemPropertyCount, &DataManager::atWatchItemProperty, &DataManager::clearWatchItemProperty);
-}
-
-void DataManager::appendToWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList, WatchItem* watchItem)
-{
-    DataManager* dataManager = qobject_cast<DataManager*>(watchItemList->object);
-    if(dataManager){
-        watchItem->setParent(dataManager);
-        dataManager->m_watchItems.append(watchItem);
-        emit dataManager->addedToWatchItems(watchItem);
-    }
-    else {
-        qWarning() << "cannot append WatchItem to WatchItems";
-    }
-}
-
-int DataManager::watchItemPropertyCount(QQmlListProperty<WatchItem>* watchItemList)
-{
-    DataManager* dataManager = qobject_cast<DataManager*>(watchItemList->object);
-    if(dataManager){
-        return dataManager->m_watchItems.size();
-    }
-    else{
-        qWarning() << "cannot get count of WatchItems";
-    }
-    return 0;
-}
-
-WatchItem* DataManager::atWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList, int pos)
-{
-    DataManager* dataManager = qobject_cast<DataManager*>(watchItemList->object);
-    if (dataManager){
-        if(dataManager->m_watchItems.size() > pos){
-            return static_cast<WatchItem*>(dataManager->m_watchItems.at(pos));
-        }
-        qWarning("cannot get WatchItem* at pos %s", qPrintable(QString::number(pos)));
-    }
-    else{
-        qWarning("cannot get WatchItem* at pos %s", qPrintable(QString::number(pos)));
-    }
-    return 0;
-}
-void DataManager::clearWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList)
-{
-    DataManager* dataManager = qobject_cast<DataManager*>(watchItemList->object);
-    if(dataManager){
-        for(int i = 0; i < dataManager->m_watchItems.size(); ++i) {
-            WatchItem* watchItem;
-            watchItem = static_cast<WatchItem*>(dataManager->m_watchItems.at(i));
-            emit dataManager->deletedFromWatchItems(watchItem);
-            watchItem->deleteLater();
-            watchItem = 0;
-        }
-        dataManager->m_watchItems.clear();
-    }
-    else{
-        qWarning() << "cannot clear WatchItems";
-    }
 }

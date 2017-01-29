@@ -79,7 +79,7 @@ Item {
                         WeekdayPresentation {
                             id: weekdayPresentation
                             rightPadding: 12
-                            weekDayArray: model.modelData.weekDays
+                            weekDayArray: weekdays
                             Layout.fillWidth: true
                         }
                     }

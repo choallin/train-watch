@@ -69,6 +69,8 @@ public:
     Q_INVOKABLE
     bool isValid() const;
 
+    static bool watchItemLessThan(QObject* v1, QObject* v2);
+
 Q_SIGNALS:
     void titleChanged();
     void countryChanged();

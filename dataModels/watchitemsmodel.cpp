@@ -73,3 +73,10 @@ QHash<int, QByteArray> WatchItemsModel::roleNames() const
 
     return roles;
 }
+
+void WatchItemsModel::appendWatchItem(WatchItem* watchItem)
+{
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_watchItems->append(watchItem);
+    endInsertRows();
+}

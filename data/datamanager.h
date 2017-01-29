@@ -1,29 +1,32 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
+#include <QDebug>
 #include <QObject>
-#include <QQmlListProperty>
 
 #include "../dataClasses/watchitem.h"
+#include "../dataModels/watchitemsmodel.h"
 
 class DataManager: public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QQmlListProperty<WatchItem> watchItemPropertyList READ watchItemPropertyList NOTIFY watchItemPropertyListChanged)
+    Q_PROPERTY(WatchItemsModel* watchItemsModel READ watchItemsModel)
 
 private:
     QString m_dataRoot;
     QString m_dataPath;
+    WatchItemsModel* m_watchItemsModel;
+    QList<WatchItem*>* m_watchItemList;
 
 public:
     DataManager(QObject *parent = 0);
     ~DataManager();
 
+    inline WatchItemsModel* watchItemsModel() { return m_watchItemsModel; }
+
     Q_INVOKABLE
     void initialize();
-
-    QQmlListProperty<WatchItem> watchItemPropertyList();
 
     Q_INVOKABLE
     WatchItem* createWatchItem();
@@ -45,15 +48,8 @@ private:
     QVariantList readfromCache(const QString& filename);
     void writeToCache(const QString& filename, QVariantList& data);
 
-    QList<QObject*> m_watchItems;
-
     void initializeWatchItemsFromCache();
     void saveWatchItemsToCache();
-
-    static void appendToWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList, WatchItem* watchItem);
-    static int watchItemPropertyCount(QQmlListProperty<WatchItem>* watchItemList);
-    static WatchItem* atWatchItemProperty(QQmlListProperty<WatchItem>* watchItemList, int pos);
-    static void clearWatchItemProperty(QQmlListProperty<WatchItem>* WatchItemList);
 };
 
 #endif // DATAMANAGER_H
