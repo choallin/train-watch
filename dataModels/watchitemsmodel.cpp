@@ -80,3 +80,13 @@ void WatchItemsModel::appendWatchItem(WatchItem* watchItem)
     m_watchItems->append(watchItem);
     endInsertRows();
 }
+
+WatchItem* WatchItemsModel::watchItemAt(const int index)
+{
+    return m_watchItems->at(index);
+}
+
+void WatchItemsModel::watchItemSaved(const int row)
+{
+    emit dataChanged(index(row, 0), index(row, 0));
+}

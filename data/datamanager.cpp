@@ -133,6 +133,11 @@ void DataManager::initializeWatchItemsFromCache()
     qDebug("%s watchItems created", qPrintable(QString::number(m_watchItemList->size())));
 }
 
+WatchItem* DataManager::watchItemAt(const int index)
+{
+    m_watchItemsModel->watchItemAt(index);
+}
+
 WatchItem* DataManager::createWatchItem()
 {
     WatchItem* watchItem = new WatchItem(this);
@@ -152,5 +157,12 @@ void DataManager::appendWatchItem(WatchItem* watchItem)
     watchItem->setParent(this);
     m_watchItemsModel->appendWatchItem(watchItem);
     saveWatchItemsToCache();
+    emit addedToWatchItems(watchItem);
+}
+
+void DataManager::saveWatchItem(const int index, WatchItem* watchItem)
+{
+    saveWatchItemsToCache();
+    m_watchItemsModel->watchItemSaved(index);
     emit addedToWatchItems(watchItem);
 }

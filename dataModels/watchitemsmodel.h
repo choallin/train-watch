@@ -32,6 +32,8 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
     void appendWatchItem(WatchItem* watchItem);
+    WatchItem* watchItemAt(const int index);
+    void watchItemSaved(const int row);
 };
 
 #endif // WATCHITEMSMODEL_H
