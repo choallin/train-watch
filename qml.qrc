@@ -31,5 +31,7 @@
         <file>guiDelegates/CountryRowDelegate.qml</file>
         <file>components/Home.qml</file>
         <file>guiItems/WeekdayPresentation.qml</file>
+        <file>components/WatchItemForm.qml</file>
+        <file>components/EditWatch.qml</file>
     </qresource>
 </RCC>
