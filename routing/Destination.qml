@@ -4,13 +4,16 @@ import QtQuick.Controls 2.0
 
 Loader {
     id: pageLoader
+
     property int pageActivationPolicy: modelData.activationPolicy
+    property var parameters
+
     active: pageActivationPolicy === activationPolicy.IMMEDIATELY
     visible: false
 
     source: modelData.source
     onLoaded: {
-        item.init()
+        item.init(parameters)
         if(pageActivationPolicy !== activationPolicy.IMMEDIATELY) {
             rootView.replaceDestination(pageLoader)
         }

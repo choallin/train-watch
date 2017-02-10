@@ -42,7 +42,7 @@ ToolBar {
             }
             onClicked: {
                 if(destinations.itemAt(navigationIndex).item.goBack()) {
-                    --navigationIndex;
+                    rootView.goBack();
                 }
             }
         }
@@ -66,7 +66,7 @@ ToolBar {
             }
             onClicked: {
                 if(destinations.itemAt(navigationIndex).item.cancel()) {
-                    --navigationIndex;
+                    rootView.goBack();
                 }
             }
         }
@@ -88,7 +88,7 @@ ToolBar {
                 MenuItem {
                     text: qsTr("Add Watch Item")
                     onTriggered: {
-                        navigationIndex = addWatchItemIndex
+                        rootView.activateDestination(addWatchItemIndex);
                     }
                 }
                 onAboutToHide: {

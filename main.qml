@@ -52,9 +52,12 @@ ApplicationWindow {
 
     property int homeNavigationIndex: 0
     property int addWatchItemIndex: 1
+    property int editWatchItemIndex: 2
+
     property var navigationModel: [
         {"name": "HomeRoute", "source": "../components/Home.qml", "activationPolicy": 1, "canGoBack": false, "canCancel": false},
         {"name": "CreateWatchRoute", "source": "../components/CreateWatch.qml", "activationPolicy": 3, "canGoBack":true, "canCancel": true},
+        {"name": "EditWatchRoute", "source": "../components/EditWatch.qml", "activationPolicy": 3, "canGoBack":true, "canCancel": false},
     ]
 
     property bool initDone: true
@@ -63,10 +66,12 @@ ApplicationWindow {
     property var navigationTitles: [
         qsTr("Train Watch"),
         qsTr("Create Watch Item"),
+        qsTr("Edit Watch Item"),
     ]
 
     property int firstActiveDestination: homeNavigationIndex
     property int navigationIndex: firstActiveDestination
+    property var navigationHistory: [firstActiveDestination];
 
     // StackView
     property var activationPolicy: {
@@ -74,7 +79,7 @@ ApplicationWindow {
     }
 
     onNavigationIndexChanged: {
-        rootView.activateDestination(navigationIndex)
+        navigationHistory.push(navigationIndex);
     }
 
     Material.theme: Material.Light
@@ -120,11 +125,16 @@ ApplicationWindow {
             // all destinatation items with activationPolicy IMMEDIATELY are activated
         }
 
-        function activateDestination(navigationIndex) {
-            if(destinations.itemAt(navigationIndex).status === Loader.Ready) {
-                replaceDestination(destinations.itemAt(navigationIndex))
-            } else {
-                destinations.itemAt(navigationIndex).active = true
+        function activateDestination(navigationIndex, parameters) {
+            appWindow.navigationIndex = navigationIndex;
+            var nextDestination = destinations.itemAt(navigationIndex);
+            nextDestination.parameters = parameters;
+
+            if(nextDestination.status === Loader.Ready) {
+                replaceDestination(nextDestination)
+            }
+            else {
+                nextDestination.active = true
             }
         }
 
@@ -145,6 +155,10 @@ ApplicationWindow {
                     destinations.itemAt(previousIndex).active = false
                 }
             }
+        }
+
+        function goBack() {
+            activateDestination(navigationHistory[navigationHistory.length-2]);
         }
     }
 

@@ -5,7 +5,7 @@ import "../guiItems"
 import "../models"
 
 Item {
-    property int myIndex: 0
+    property int myIndex: homeNavigationIndex
     property string name: "HomePage"
 
     Page {
@@ -56,14 +56,14 @@ Item {
 
                         Label {
                             rightPadding: 12
-                            text: "<b>Station:</b>&ensp; " + station
+                            text: "<b>Station:</b> " + station
                             Layout.fillWidth: true
                             opacity: opacityBodyAndButton
                         }
 
                         Label {
                             rightPadding: 12
-                            text: "<b>Line:</b>&ensp;&ensp; " + line
+                            text: "<b>Line:</b> " + line
                             Layout.fillWidth: true
                             opacity: opacityBodyAndButton
                         }
@@ -76,11 +76,25 @@ Item {
                             opacity: opacitySubheading
                         }
 
-                        WeekdayPresentation {
-                            id: weekdayPresentation
-                            rightPadding: 12
-                            weekDayArray: weekdays
+                        RowLayout {
                             Layout.fillWidth: true
+                            WeekdayPresentation {
+                                id: weekdayPresentation
+                                rightPadding: 12
+                                weekDayArray: weekdays
+                                Layout.fillWidth: true
+                            }
+
+                            ButtonIconActive {
+                                id: btnEdit
+                                visible: true
+                                imageName: "create.png"
+                                onClicked: function() {
+                                    rootView.activateDestination(editWatchItemIndex, {
+                                        watchItemIndex: index
+                                    });
+                                }
+                            }
                         }
                     }
                 }

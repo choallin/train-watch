@@ -53,5 +53,13 @@
         <file>images/white/flag@2x.png</file>
         <file>images/white/flag@3x.png</file>
         <file>images/white/flag@4x.png</file>
+        <file>images/black/create.png</file>
+        <file>images/black/create@2x.png</file>
+        <file>images/black/create@3x.png</file>
+        <file>images/black/create@4x.png</file>
+        <file>images/white/create.png</file>
+        <file>images/white/create@2x.png</file>
+        <file>images/white/create@3x.png</file>
+        <file>images/white/create@4x.png</file>
     </qresource>
 </RCC>
