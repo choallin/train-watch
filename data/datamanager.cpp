@@ -135,7 +135,7 @@ void DataManager::initializeWatchItemsFromCache()
 
 WatchItem* DataManager::watchItemAt(const int index)
 {
-    m_watchItemsModel->watchItemAt(index);
+    return m_watchItemsModel->watchItemAt(index);
 }
 
 WatchItem* DataManager::createWatchItem()
