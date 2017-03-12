@@ -11,6 +11,7 @@ class WatchItemsModel : public QAbstractListModel
 
 public:
     enum WatchItemRoles {
+        UuidRole = Qt::UserRole + 7,
         TitleRole = Qt::UserRole + 1,
         ActiveRole = Qt::UserRole + 2,
         StationRole = Qt::UserRole + 3,
@@ -32,8 +33,11 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
     void appendWatchItem(WatchItem* watchItem);
-    WatchItem* watchItemAt(const int index);
-    void watchItemSaved(const int row);
+    WatchItem* findWatchItem(const QString& uuid);
+    void watchItemSaved(WatchItem* watchItem);
+
+private:
+    QModelIndex indexForData(const int role, const QString& data);
 };
 
 #endif // WATCHITEMSMODEL_H

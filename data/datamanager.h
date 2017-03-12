@@ -32,7 +32,7 @@ public:
     WatchItem* createWatchItem();
 
     Q_INVOKABLE
-    WatchItem* watchItemAt(const int index);
+    WatchItem* findWatchItem(const QString& uuid);
 
     Q_INVOKABLE
     void undoCreateWatchItem(WatchItem* watchItem);
@@ -41,7 +41,7 @@ public:
     void appendWatchItem(WatchItem* watchItem);
 
     Q_INVOKABLE
-    void saveWatchItem(const int index, WatchItem* watchItem);
+    void saveWatchItem(WatchItem* watchItem);
 
 signals:
     void watchItemPropertyListChanged();

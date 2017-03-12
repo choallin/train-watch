@@ -37,7 +37,10 @@ QVariant WatchItemsModel::data(const QModelIndex &index, int role) const
 
     WatchItem const * const watchItem = m_watchItems->at(index.row());
 
-    if(role == TitleRole){
+    if(role == UuidRole){
+        return watchItem->uuid();
+    }
+    else if(role == TitleRole){
         return watchItem->title();
     }
     else if(role == ActiveRole){
@@ -64,12 +67,13 @@ QHash<int, QByteArray> WatchItemsModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
 
-    roles[TitleRole] = "title";
-    roles[ActiveRole] = "active";
-    roles[StationRole] = "station";
-    roles[LineRole] = "line";
+    roles[UuidRole]      = "uuid";
+    roles[TitleRole]     = "title";
+    roles[ActiveRole]    = "active";
+    roles[StationRole]   = "station";
+    roles[LineRole]      = "line";
     roles[DepartureRole] = "departure";
-    roles[WeekDaysRole] = "weekdays";
+    roles[WeekDaysRole]  = "weekdays";
 
     return roles;
 }
@@ -81,12 +85,23 @@ void WatchItemsModel::appendWatchItem(WatchItem* watchItem)
     endInsertRows();
 }
 
-WatchItem* WatchItemsModel::watchItemAt(const int index)
+WatchItem* WatchItemsModel::findWatchItem(const QString& uuid)
 {
-    return m_watchItems->at(index);
+    return m_watchItems->at(indexForData(UuidRole, uuid).row());
 }
 
-void WatchItemsModel::watchItemSaved(const int row)
+void WatchItemsModel::watchItemSaved(WatchItem* watchItem)
 {
-    emit dataChanged(index(row, 0), index(row, 0));
+    QModelIndex matchIndex = indexForData(UuidRole, watchItem->uuid());
+    emit dataChanged(matchIndex, matchIndex);
 }
+
+QModelIndex WatchItemsModel::indexForData(const int role, const QString& data)
+{
+    QModelIndexList matches = match(this->index(0, 0), role, data, 1, Qt::MatchExactly);
+    if(matches.count() != 1){
+        qFatal("more than one matches at indexForData role: %s,  data: %s", qPrintable(QString::number(role)), qPrintable(data));
+    }
+    return matches.first();
+}
+

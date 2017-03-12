@@ -7,7 +7,7 @@ Item {
 
     QtObject {
         id: p
-        property int watchItemIndex
+        property string uuid
     }
 
     WatchItemForm {
@@ -15,8 +15,8 @@ Item {
     }
 
     function init(parameters) {
-        p.watchItemIndex = parameters.watchItemIndex
-        var watchItem = dataManager.watchItemAt(p.watchItemIndex);
+        p.uuid = parameters.uuid
+        var watchItem = dataManager.findWatchItem(p.uuid);
         watchItemForm.init(watchItem);
     }
 
@@ -25,7 +25,7 @@ Item {
             showInfo(qsTr("The Watch-Item could not be saved.\nPlease check your inputs."));
             return false;
         }
-        dataManager.saveWatchItem(p.watchItemIndex, watchItemForm.watchItem);
+        dataManager.saveWatchItem(watchItemForm.watchItem);
         return true;
     }
 }

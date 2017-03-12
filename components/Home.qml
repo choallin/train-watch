@@ -90,7 +90,7 @@ Item {
                                 imageName: "create.png"
                                 onClicked: function() {
                                     rootView.activateDestination(editWatchItemIndex, {
-                                        watchItemIndex: index
+                                        uuid: uuid
                                     });
                                 }
                             }
