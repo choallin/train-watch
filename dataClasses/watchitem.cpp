@@ -1,9 +1,11 @@
 #include <QDebug>
+#include <QUuid>
 
 #include "watchitem.h"
 
 WatchItem::WatchItem(QObject* parent) :
     QObject(parent),
+    m_uuid(QUuid::createUuid().toString()),
     m_title(QString()),
     m_country(new Country()),
     m_station(new Station("1", "Station1")),
@@ -22,7 +24,8 @@ WatchItem::~WatchItem()
 
 QString WatchItem::toS() const
 {
-    return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7, %8)")
+    return QString("WatchItem(%1, %2, %3, %4, %5, %6, %7, %8, %9)")
+            .arg(m_uuid)
             .arg(m_title)
             .arg(m_country ? m_country->toS() : "NULL")
             .arg(m_station ? m_station->toS() : "NULL")
@@ -32,6 +35,15 @@ QString WatchItem::toS() const
             .arg(m_offset)
             .arg(m_active);
 }
+
+void WatchItem::setUuid(const QString& uuid)
+{
+    if(m_uuid != uuid){
+        m_uuid = uuid;
+        emit uuidChanged();
+    }
+}
+
 
 void WatchItem::setTitle(const QString& title)
 {
@@ -97,6 +109,7 @@ bool WatchItem::isValid() const
 
 void WatchItem::fillFromCacheMap(const QVariantMap& map)
 {
+    m_uuid = map.value("uuid").toString();
     m_title = map.value("title").toString();
     Country* country = new Country(this);
     country->fillFromCacheMap(map.value("country").toMap());
@@ -116,6 +129,7 @@ void WatchItem::fillFromCacheMap(const QVariantMap& map)
 QVariantMap WatchItem::toCacheMap() const
 {
     QVariantMap map;
+    map.insert("uuid", uuid());
     map.insert("title", title());
     map.insert("country", country()->toCacheMap());
     map.insert("station", station()->toCacheMap());
